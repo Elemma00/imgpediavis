@@ -1,3 +1,9 @@
-<p>
-  img-detail works!
-</p>
+<img src={{info.originalUrl}}/>
+<hr>
+<p><b>File: </b>{{info.fileName}}</p>
+<p *ngIf="info.height"><b>Height:</b>{{info.height}}</p>
+<p><b>Associated with </b><a href="{{info.associatedWith}}">{{info.associatedWith}}</a></p>
+<p><b>Appears in </b><a href="{{info.appearsIn}}">{{info.appearsIn}}</a></p>
+<div *ngFor="let item of similarsUrls">
+  <img src={{item}}>
+</div>
