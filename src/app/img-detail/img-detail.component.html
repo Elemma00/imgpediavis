@@ -1,9 +1,17 @@
-<img src={{info.originalUrl}}/>
-<hr>
-<p><b>File: </b>{{info.fileName}}</p>
-<p *ngIf="info.height"><b>Height:</b>{{info.height}}</p>
-<p><b>Associated with </b><a href="{{info.associatedWith}}">{{info.associatedWith}}</a></p>
-<p><b>Appears in </b><a href="{{info.appearsIn}}">{{info.appearsIn}}</a></p>
-<div *ngFor="let item of similarsUrls">
-  <img src={{item}}>
-</div>
+<mat-card>
+  <div fxLayout="row">
+  <img mat-card-image src="{{info.originalUrl}}" fxFlex="50" height="500">
+    <mat-card-content fxFlex="50">
+      <p><b>File: </b>{{info.fileName}}</p>
+      <p *ngIf="info.height"><b>Height:</b>{{info.height}}</p>
+      <p><b>Associated with </b><a href="{{info.associatedWith}}">{{info.associatedWith}}</a></p>
+      <p><b>Appears in </b><a href="{{info.appearsIn}}">{{info.appearsIn}}</a></p>
+    </mat-card-content>
+  </div>
+</mat-card>
+<mat-grid-list cols="4" rowHeight="300px">
+  <mat-grid-tile
+    *ngFor="let s of similarsUrls">
+    <img src="{{s}}">
+  </mat-grid-tile>
+</mat-grid-list>
