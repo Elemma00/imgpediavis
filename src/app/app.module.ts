@@ -8,6 +8,7 @@ import {Routes, RouterModule} from '@angular/router';
 /* Material */
 import { MatCardModule } from '@angular/material';
 import { MatGridListModule } from '@angular/material';
+import { MatToolbarModule } from '@angular/material';
 
 /* App components */
 import { AppComponent } from './app.component';
@@ -33,7 +34,8 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes, {useHash: true}),
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    MatToolbarModule
   ],
   providers: [MainService],
   bootstrap: [AppComponent]

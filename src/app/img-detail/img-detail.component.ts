@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { Constants } from '../model/constants.model';
 import { ImgInfo } from '../model/img-info.model';
 import { MainService } from '../main.service';
 import { SimilarInfo } from '../model/similar-info.model';
-import {win} from '@angular/platform-browser/src/browser/tools/browser';
 
 @Component({
   selector: 'app-img-detail',
