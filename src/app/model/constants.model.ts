@@ -15,9 +15,10 @@ export class Constants {
     'http://imgpedia.dcc.uchile.cl/sparql?query=describe<http://imgpedia.dcc.uchile.cl/resource/%>&format=json';
 
   /** APIs **/
-  /* Need to replace '%' with a resource name like 'File:example.jpg' or 'File:example1.jpg|File:example2.jpg' */
+  /* First replace '%' with a resource name like 'File:example.jpg' or 'File:example1.jpg|File:example2.jpg' */
+  /* Second replace '%' with width of the thumb in pixels*/
   static wikiAPIGetImageInfo =
-    'https://commons.wikimedia.org/w/api.php?action=query&titles=%&prop=imageinfo&&iiprop=url&format=json';
+    'https://commons.wikimedia.org/w/api.php?action=query&titles=%&prop=imageinfo&&iiprop=url&iiurlwidth=%&format=json';
 
   /** Others **/
   /* Wikimedia API header request */

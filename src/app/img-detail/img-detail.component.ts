@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 import { Constants } from '../model/constants.model';
 import { ImgInfo } from '../model/img-info.model';
 import { MainService } from '../main.service';
+import { SimilarInfo } from '../model/similar-info.model';
+import {win} from '@angular/platform-browser/src/browser/tools/browser';
 
 @Component({
   selector: 'app-img-detail',
@@ -15,16 +17,21 @@ export class ImgDetailComponent implements OnInit {
   private info: ImgInfo = new ImgInfo();
 
   private similars: string[] = [];
-  private similarsUrls: string[] = [];
+  private simInfo: SimilarInfo[] = [];
 
 
   constructor(private service: MainService, private route: ActivatedRoute) {
-    this.route.params.subscribe(params => this.info.fileName = params['filename']);
   }
 
   ngOnInit() {
-    this.getImg();
-    this.getImgInfoAndBindings();
+    this.route.params.subscribe(params => {
+      this.info = new ImgInfo();
+      this.info.fileName = params['filename'];
+      this.simInfo = [];
+      this.similars = [];
+      this.getImg();
+      this.getImgInfoAndBindings();
+    });
   }
 
   addBinding(s: string, p: string, o: string): void {
@@ -51,12 +58,15 @@ export class ImgDetailComponent implements OnInit {
 
   getSimilarUrls(similars: string[]): void {
     for (let i = 0, j = similars.length; i < j; i += Constants.MAX_WIKI_REQUEST) {
-        this.service.getSimilarImgInfo(similars.slice(i, i + Constants.MAX_WIKI_REQUEST))
+        this.service.getSimilarImgInfo(similars.slice(i, i + Constants.MAX_WIKI_REQUEST), 500)
           .subscribe( res => {
               const pages = res['query']['pages'];
               for (const key in pages) {
                 if (+key > 0 && pages.hasOwnProperty(key)) {
-                  this.similarsUrls.push(pages[key]['imageinfo'][0]['url']);
+                  this.simInfo.push(new SimilarInfo(
+                    pages[key]['title'],
+                    pages[key]['imageinfo'][0]['thumburl']
+                  ));
                 }
               }
             },
@@ -65,12 +75,13 @@ export class ImgDetailComponent implements OnInit {
   }
 
   getImg(): void {
-    this.service.getImgUrl(this.info.fileName).subscribe(
+    this.service.getImgUrl(this.info.fileName, window.screen.width / 2).subscribe(
       res => {
         const pages = res['query']['pages'];
         for (const key in pages) {
           if (pages.hasOwnProperty(key)) {
             this.info.originalUrl = pages[key]['imageinfo'][0]['url'];
+            this.info.thumbUrl = pages[key]['imageinfo'][0]['thumburl'];
           }
         }
       }

@@ -1,17 +1,22 @@
 <mat-card>
   <div fxLayout="row">
-  <img mat-card-image src="{{info.originalUrl}}" fxFlex="50" height="500">
+    <a href="{{info.originalUrl}}"><img mat-card-image src="{{info.thumbUrl}}"></a>
     <mat-card-content fxFlex="50">
       <p><b>File: </b>{{info.fileName}}</p>
       <p *ngIf="info.height"><b>Height:</b>{{info.height}}</p>
-      <p><b>Associated with </b><a href="{{info.associatedWith}}">{{info.associatedWith}}</a></p>
-      <p><b>Appears in </b><a href="{{info.appearsIn}}">{{info.appearsIn}}</a></p>
+      <p *ngIf="info.associatedWith"><b>Associated with </b><a href="{{info.associatedWith}}">{{info.associatedWith}}</a></p>
+      <p *ngIf="info.appearsIn"><b>Appears in </b><a href="{{info.appearsIn}}">{{info.appearsIn}}</a></p>
     </mat-card-content>
   </div>
 </mat-card>
-<mat-grid-list cols="4" rowHeight="300px">
-  <mat-grid-tile
-    *ngFor="let s of similarsUrls">
-    <img src="{{s}}">
-  </mat-grid-tile>
-</mat-grid-list>
+<div *ngIf="simInfo.length > 0">
+  <mat-grid-list cols="4" rowHeight="6:3" gutterSize="15px">
+    <mat-grid-tile
+      *ngFor="let s of simInfo">
+      <a [routerLink]="['/detail', s.fileName]"><img src="{{s.wikiThumUrl}}" alt="{{s.fileName}}"></a>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+<div *ngIf="simInfo.length <= 0">
+  <h2>No similar images</h2>
+</div>

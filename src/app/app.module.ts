@@ -17,7 +17,7 @@ import { ImgDetailComponent } from './img-detail/img-detail.component';
 import {MainService} from './main.service';
 
 const routes: Routes = [
-  {path: ':filename', component: ImgDetailComponent},
+  {path: 'detail/:filename', component: ImgDetailComponent},
 ];
 
 
