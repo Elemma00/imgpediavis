@@ -1,14 +1,14 @@
 <mat-toolbar color="primary">
-  <span>{{info.fileName}}</span>
+  <span>{{detail.fileName}}</span>
 </mat-toolbar>
 <br>
 <mat-card style="width: 50%; margin-left: 25%">
-    <a [href]=info.originalUrl><img mat-card-image [src]=info.thumbUrl></a>
+    <a [href]=detail.originalUrl><img mat-card-image [src]=detail.thumbUrl></a>
     <mat-card-content>
       <p><b>File: </b>{{info.fileName}}</p>
-      <p *ngIf="info.height"><b>Height:</b>{{info.height}}</p>
-      <p *ngIf="info.associatedWith"><b>Associated with </b><a [href]=info.associatedWith>{{info.associatedWith}}</a></p>
-      <p *ngIf="info.appearsIn"><b>Appears in </b><a [href]=info.appearsIn>{{info.appearsIn}}</a></p>
+      <p *ngIf="detail.height"><b>Height:</b>{{info.height}}</p>
+      <p *ngIf="detail.associatedWith"><b>Associated with </b><a [href]=info.associatedWith>{{info.associatedWith}}</a></p>
+      <p *ngIf="detail.appearsIn"><b>Appears in </b><a [href]=info.appearsIn>{{info.appearsIn}}</a></p>
     </mat-card-content>
 </mat-card>
 <div *ngIf="similars.length > 0">

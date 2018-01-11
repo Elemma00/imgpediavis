@@ -1,4 +1,4 @@
-export class ImgInfo {
+export class ImgDetailInfo {
   fileName: string;
   originalUrl: string;
   thumbUrl: string;
