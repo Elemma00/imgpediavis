@@ -1,11 +1,18 @@
 export class SimilarInfo {
+  private _fileName: string;
+  private _thumbUrl: string;
 
-  public imgpediaUrl: string;
+  constructor(fileName: string, thumbUrl) {
+    this._fileName = fileName.split(':')[1].replace(/ /g, '_');
+    this._thumbUrl = thumbUrl;
+  }
 
-  constructor(
-    public fileName: string,
-    public wikiThumUrl: string
-  ) {
-    this.fileName = this.fileName.split(':')[1].replace(/ /g, '_');
+  get fileName(): string {
+    return this._fileName;
+  }
+
+  get thumbUrl(): string {
+    return this._thumbUrl;
   }
 }
+

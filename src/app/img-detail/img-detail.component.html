@@ -3,22 +3,22 @@
 </mat-toolbar>
 <br>
 <mat-card style="width: 50%; margin-left: 25%">
-    <a href="{{info.originalUrl}}"><img mat-card-image src="{{info.thumbUrl}}"></a>
+    <a [href]=info.originalUrl><img mat-card-image [src]=info.thumbUrl></a>
     <mat-card-content>
       <p><b>File: </b>{{info.fileName}}</p>
       <p *ngIf="info.height"><b>Height:</b>{{info.height}}</p>
-      <p *ngIf="info.associatedWith"><b>Associated with </b><a href="{{info.associatedWith}}">{{info.associatedWith}}</a></p>
-      <p *ngIf="info.appearsIn"><b>Appears in </b><a href="{{info.appearsIn}}">{{info.appearsIn}}</a></p>
+      <p *ngIf="info.associatedWith"><b>Associated with </b><a [href]=info.associatedWith>{{info.associatedWith}}</a></p>
+      <p *ngIf="info.appearsIn"><b>Appears in </b><a [href]=info.appearsIn>{{info.appearsIn}}</a></p>
     </mat-card-content>
 </mat-card>
-<div *ngIf="simInfo.length > 0">
-  <mat-grid-list cols="4" rowHeight="6:3" gutterSize="15px">
+<div *ngIf="similars.length > 0">
+  <mat-grid-list cols="6" rowHeight="6:3" gutterSize="15px">
     <mat-grid-tile
-      *ngFor="let s of simInfo">
-      <a [routerLink]="['/detail', s.fileName]"><img src="{{s.wikiThumUrl}}" alt="{{s.fileName}}"></a>
+      *ngFor="let s of similars">
+      <a [routerLink]="['/detail', s.fileName]"><img [src]=s.thumbUrl [alt]=s.fileName></a>
     </mat-grid-tile>
   </mat-grid-list>
 </div>
-<div *ngIf="simInfo.length <= 0">
+<div *ngIf="similars.length <= 0">
   <h2>No similar images</h2>
 </div>

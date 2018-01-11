@@ -15,8 +15,8 @@ export class ImgDetailComponent implements OnInit {
 
   private info: ImgInfo = new ImgInfo();
 
-  private similars: string[] = [];
-  private simInfo: SimilarInfo[] = [];
+  private similarsNames: string[] = [];
+  private similars: SimilarInfo[] = [];
 
 
   constructor(private service: MainService, private route: ActivatedRoute) {
@@ -26,7 +26,7 @@ export class ImgDetailComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.info = new ImgInfo();
       this.info.fileName = params['filename'];
-      this.simInfo = [];
+      this.similarsNames = [];
       this.similars = [];
       this.getImg();
       this.getImgInfoAndBindings();
@@ -34,35 +34,35 @@ export class ImgDetailComponent implements OnInit {
   }
 
   addBinding(s: string, p: string, o: string): void {
-    if (p.localeCompare('http://imgpedia.dcc.uchile.cl/ontology#similar') === 0) {
-      if (s.localeCompare('http://imgpedia.dcc.uchile.cl/resource/' + this.info.fileName) === 0) {
+    if (p.localeCompare(Constants.IMGPEDIA_PROP_SIMILAR) === 0) {
+      if (s.localeCompare(Constants.IMGPEDIA_URL_RESOURCE + this.info.fileName) === 0) {
         const os = o.split('.');
-        if (Constants.imagesFormats.indexOf(os[os.length - 1].toLowerCase()) !== -1) {
-          this.similars.push(o);
+        if (Constants.IMAGE_FORMATS.indexOf(os[os.length - 1].toLowerCase()) !== -1) {
+          this.similarsNames.push(o);
         }
       } else {
         const ss = s.split('.');
-        if (Constants.imagesFormats.indexOf(ss[ss.length - 1].toLowerCase()) !== -1) {
-          this.similars.push(s);
+        if (Constants.IMAGE_FORMATS.indexOf(ss[ss.length - 1].toLowerCase()) !== -1) {
+          this.similarsNames.push(s);
         }
       }
-    } else if (p.localeCompare('http://imgpedia.dcc.uchile.cl/ontology#appearsIn') === 0) {
+    } else if (p.localeCompare(Constants.IMGPEDIA_PROP_APPEARS_IN) === 0) {
       this.info.appearsIn = o;
-    } else if (p.localeCompare('http://imgpedia.dcc.uchile.cl/ontology#associatedWith') === 0) {
+    } else if (p.localeCompare(Constants.IMGPEDIA_PROP_ASSOCIATED_WITH) === 0) {
       this.info.associatedWith = o;
-    } else if (p.localeCompare('http://imgpedia.dcc.uchile.cl/ontology#height') === 0) {
+    } else if (p.localeCompare(Constants.IMGPEDIA_PROP_HEIGHT) === 0) {
       this.info.height = +o['value'];
     }
   }
 
   getSimilarUrls(similars: string[]): void {
     for (let i = 0, j = similars.length; i < j; i += Constants.MAX_WIKI_REQUEST) {
-        this.service.getSimilarImgInfo(similars.slice(i, i + Constants.MAX_WIKI_REQUEST), 500)
+        this.service.getSimilarImgInfo(similars.slice(i, i + Constants.MAX_WIKI_REQUEST), window.screen.width / 4)
           .subscribe( res => {
               const pages = res['query']['pages'];
               for (const key in pages) {
                 if (+key > 0 && pages.hasOwnProperty(key)) {
-                  this.simInfo.push(new SimilarInfo(
+                  this.similars.push(new SimilarInfo(
                     pages[key]['title'],
                     pages[key]['imageinfo'][0]['thumburl']
                   ));
@@ -96,7 +96,7 @@ export class ImgDetailComponent implements OnInit {
             this.addBinding(bindings[key]['s']['value'], bindings[key]['p']['value'], bindings[key]['o']['value']);
           }
         }
-        this.getSimilarUrls(this.similars);
+        this.getSimilarUrls(this.similarsNames);
       }
     );
   }
