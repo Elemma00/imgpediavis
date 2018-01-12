@@ -33,7 +33,9 @@ export class ImgDetailComponent implements OnInit {
       this.detail = new ImgDetailInfo();
       this.detail.fileName = params['filename'];
       this.similarsNames = [];
-      this.similarCLD = this.similarGHD = this.similarHOG = {};
+      this.similarCLD = {};
+      this.similarGHD = {};
+      this.similarHOG = {};
       this.getImg();
       this.getImgInfoAndBindings();
     });
@@ -114,7 +116,6 @@ export class ImgDetailComponent implements OnInit {
             }
           }
         }
-        console.log(this.detail);
       }
     );
   }
@@ -124,7 +125,6 @@ export class ImgDetailComponent implements OnInit {
       res => {
         const bindings = res.results.bindings;
         if (bindings.length > 0) {
-
           for (const key in bindings) {
             if (bindings.hasOwnProperty (key)) {
               this.addBinding(bindings[key]);
