@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 
 import {Constants} from './model/constants.model';
-import {ImgPediaConsult} from './model/img-pedia-image-query.model';
+import {ImgpediaBindingQueryResult} from './model/imgpedia-image-binding-query.model';
+import {ImgpediaDetailQueryResult} from './model/imgpedia-image-detail-query.model';
 import {WikiApiConsult} from './model/wiki-api-image-info.model';
 
 
@@ -18,8 +19,12 @@ export class MainService {
       {headers: Constants.CORS_HEADER});
   }
 
-  getImgInfo(fileName: string): Observable<ImgPediaConsult> {
-    return this.http.get<ImgPediaConsult>(Constants.IMGPEDIA_URL_DETAIL.replace('XXXX',  fileName), {headers: Constants.CORS_HEADER});
+  getImgInfo(fileName: string) : Observable<ImgpediaDetailQueryResult> {
+    return this.http.get<ImgpediaDetailQueryResult>(Constants.IMGPEDIA_URL_IMAGE_DETAIL.replace('XXXX', fileName), {headers: Constants.CORS_HEADER});
+  }
+
+  getImgBindings(fileName: string): Observable<ImgpediaBindingQueryResult> {
+    return this.http.get<ImgpediaBindingQueryResult>(Constants.IMGPEDIA_URL_IMAGE_BINDINGS.replace('XXXX',  fileName), {headers: Constants.CORS_HEADER});
   }
 
   getSimilarImgInfo(similars: string[], thumbWidht: number): Observable<WikiApiConsult> {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Binding } from '../model/img-pedia-image-query.model';
+import { Binding } from '../model/imgpedia-image-binding-query.model';
 import { Constants } from '../model/constants.model';
 import { ImgDetailInfo } from '../model/img-detail-info.model';
 import { MainService } from '../main.service';
@@ -36,7 +36,6 @@ export class ImgDetailComponent implements OnInit {
       this.similarCLD = this.similarGHD = this.similarHOG = {};
       this.getImg();
       this.getImgInfoAndBindings();
-      console.log(this.similarCLD);
     });
   }
 
@@ -53,11 +52,11 @@ export class ImgDetailComponent implements OnInit {
   }
 
   addBinding(binding: Binding): void {
-    if (binding.desc.value.localeCompare(Constants.IMGPEDIA_IMG_DESC_CLD)) {
+    if (binding.desc.value.localeCompare(Constants.IMGPEDIA_IMG_DESC_CLD) === 0) {
       this.similarCLD[binding.target.value] = new SimilarInfo(binding.target.value, +binding.dist.value);
-    } else if (binding.desc.value.localeCompare(Constants.IMGPEDIA_IMG_DESC_GHD)) {
+    } else if (binding.desc.value.localeCompare(Constants.IMGPEDIA_IMG_DESC_GHD) === 0) {
       this.similarGHD[binding.target.value] = new SimilarInfo(binding.target.value, +binding.dist.value);
-    } else if (binding.desc.value.localeCompare(Constants.IMGPEDIA_IMG_DESC_HOG)) {
+    } else if (binding.desc.value.localeCompare(Constants.IMGPEDIA_IMG_DESC_HOG) === 0) {
       this.similarHOG[binding.target.value] = new SimilarInfo(binding.target.value, +binding.dist.value);
     }
     this.similarsNames.push(binding.target.value);
@@ -101,16 +100,30 @@ export class ImgDetailComponent implements OnInit {
         }
       }
     );
+
+    this.service.getImgInfo(this.detail.fileName).subscribe(
+      res => {
+        const results = res.results.bindings;
+        for (const key in results) {
+          if (results.hasOwnProperty(key)) {
+            if (this.detail.associatedWith.indexOf(results[key].dbp.value) === -1) {
+              this.detail.associatedWith.push(results[key].dbp.value);
+            }
+            if (this.detail.appearsIn.indexOf(results[key].wiki.value) === -1) {
+              this.detail.appearsIn.push(results[key].wiki.value);
+            }
+          }
+        }
+        console.log(this.detail);
+      }
+    );
   }
 
   getImgInfoAndBindings(): void {
-    this.service.getImgInfo(this.detail.fileName).subscribe(
+    this.service.getImgBindings(this.detail.fileName).subscribe(
       res => {
         const bindings = res.results.bindings;
         if (bindings.length > 0) {
-
-          if (bindings[0].dbp) { this.detail.associatedWith = bindings[0].dbp.value; }
-          if (bindings[0].wiki) { this.detail.appearsIn = bindings[0].wiki.value; }
 
           for (const key in bindings) {
             if (bindings.hasOwnProperty (key)) {

@@ -9,8 +9,6 @@ export interface ImgpediaRegistryWithDatatype extends ImgpediaRegistry {
 
 export interface Binding {
   source: ImgpediaRegistry;
-  dbp?: ImgpediaRegistry;
-  wiki?: ImgpediaRegistry;
   target: ImgpediaRegistry;
   desc: ImgpediaRegistry;
   dist: ImgpediaRegistryWithDatatype;
@@ -20,6 +18,6 @@ export interface Results {
   bindings: Binding[];
 }
 
-export interface ImgPediaConsult {
+export interface ImgpediaBindingQueryResult {
   results: Results;
 }

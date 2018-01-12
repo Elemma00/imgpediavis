@@ -6,22 +6,26 @@
     <a [href]=detail.originalUrl><img mat-card-image [src]=detail.thumbUrl></a>
     <mat-card-content>
       <p><b>File: </b>{{detail.fileName}}</p>
+
       <p *ngIf="detail.height"><b>Height:</b>{{detail.height}}</p>
-      <p *ngIf="detail.associatedWith"><b>Associated with </b><a [href]=detail.associatedWith>{{detail.associatedWith}}</a></p>
-      <p *ngIf="detail.appearsIn"><b>Appears in </b><a [href]=detail.appearsIn>{{detail.appearsIn}}</a></p>
+
+      <div *ngIf="detail.associatedWith">
+        <b>Associated with</b>
+        <div *ngFor="let associated of detail.associatedWith">
+          <a [href]=associated>{{associated}}</a>
+        </div>
+      </div>
+
+      <div *ngIf="detail.appearsIn">
+        <b>Appears in</b>
+        <div *ngFor="let appear of detail.appearsIn">
+          <a [href]=appear>{{appear}}</a>
+        </div>
+      </div>
+
     </mat-card-content>
 </mat-card>
-<!--<div *ngIf="similars.length > 0">
-  <mat-grid-list cols="6" rowHeight="6:3" gutterSize="15px">
-    <mat-grid-tile
-      *ngFor="let s of similars">
-      <a [routerLink]="['/detail', s.fileName]"><img [src]=s.thumbUrl [alt]=s.fileName></a>
-    </mat-grid-tile>
-  </mat-grid-list>
-</div>
-<div *ngIf="similars.length <= 0">
-  <h2>No similar images</h2>
-</div>-->
+
 <mat-tab-group>
   <mat-tab label="CLD">
     <mat-grid-list cols="6" rowHeight="6:3" gutterSize="15px">
