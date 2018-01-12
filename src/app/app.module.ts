@@ -4,6 +4,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {Routes, RouterModule} from '@angular/router';
+import { MatTabsModule } from '@angular/material';
 
 /* Material */
 import { MatCardModule } from '@angular/material';
@@ -35,7 +36,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes, {useHash: true}),
     MatCardModule,
     MatGridListModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatTabsModule
   ],
   providers: [MainService],
   bootstrap: [AppComponent]

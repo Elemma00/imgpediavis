@@ -5,13 +5,13 @@
 <mat-card style="width: 50%; margin-left: 25%">
     <a [href]=detail.originalUrl><img mat-card-image [src]=detail.thumbUrl></a>
     <mat-card-content>
-      <p><b>File: </b>{{info.fileName}}</p>
-      <p *ngIf="detail.height"><b>Height:</b>{{info.height}}</p>
-      <p *ngIf="detail.associatedWith"><b>Associated with </b><a [href]=info.associatedWith>{{info.associatedWith}}</a></p>
-      <p *ngIf="detail.appearsIn"><b>Appears in </b><a [href]=info.appearsIn>{{info.appearsIn}}</a></p>
+      <p><b>File: </b>{{detail.fileName}}</p>
+      <p *ngIf="detail.height"><b>Height:</b>{{detail.height}}</p>
+      <p *ngIf="detail.associatedWith"><b>Associated with </b><a [href]=detail.associatedWith>{{detail.associatedWith}}</a></p>
+      <p *ngIf="detail.appearsIn"><b>Appears in </b><a [href]=detail.appearsIn>{{detail.appearsIn}}</a></p>
     </mat-card-content>
 </mat-card>
-<div *ngIf="similars.length > 0">
+<!--<div *ngIf="similars.length > 0">
   <mat-grid-list cols="6" rowHeight="6:3" gutterSize="15px">
     <mat-grid-tile
       *ngFor="let s of similars">
@@ -21,4 +21,30 @@
 </div>
 <div *ngIf="similars.length <= 0">
   <h2>No similar images</h2>
-</div>
+</div>-->
+<mat-tab-group>
+  <mat-tab label="CLD">
+    <mat-grid-list cols="6" rowHeight="6:3" gutterSize="15px">
+      <mat-grid-tile
+        *ngFor="let key of keysCLD()">
+        <img [src]=similarCLD[key].thumbUrl [alt]=similarCLD[key].distance>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-tab>
+  <mat-tab label="GHD">
+    <mat-grid-list cols="6" rowHeight="6:3" gutterSize="15px">
+      <mat-grid-tile
+        *ngFor="let key of keysGHD()">
+        <img [src]=similarGHD[key].thumbUrl [alt]=similarGHD[key].distance>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-tab>
+  <mat-tab label="HOG">
+    <mat-grid-list cols="6" rowHeight="6:3" gutterSize="15px">
+      <mat-grid-tile
+        *ngFor="let key of keysHOG()">
+        <img [src]=similarHOG[key].thumbUrl [alt]=similarHOG[key].distance>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-tab>
+</mat-tab-group>

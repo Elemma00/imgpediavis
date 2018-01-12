@@ -29,6 +29,12 @@ export class Constants {
   static IMGPEDIA_PROP_SIMILAR = Constants.IMGPEDIA_URL + '/ontology#similar';
   static IMGPEDIA_PROP_WIDTH = Constants.IMGPEDIA_URL + '/ontology#width';
 
+  /* Descriptor types */
+  static IMGPEDIA_IMG_DESC_CLD = Constants.IMGPEDIA_URL + '/ontology#CLD';
+  static IMGPEDIA_IMG_DESC_GHD = Constants.IMGPEDIA_URL + '/ontology#GHD';
+  static IMGPEDIA_IMG_DESC_HOG = Constants.IMGPEDIA_URL + '/ontology#HOG';
+
+
 
   /** =================================== OTHERS ================================================ **/
   /* API header request for CORS requests*/
