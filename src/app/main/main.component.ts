@@ -27,6 +27,7 @@ export class MainComponent implements OnInit {
     if (this.textValue && this.textValue.length > 0) {
       this.service.getImgpediaSparqlQuery(this.textValue).subscribe(
         res => {
+          this.communication.saveSparqlHeader(res['head']['vars']);
           this.communication.saveSparqlResult(res['results']['bindings']);
           this.router.navigate(['query']);
         },

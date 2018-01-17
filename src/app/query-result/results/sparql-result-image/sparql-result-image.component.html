@@ -1,1 +1,5 @@
-<a [routerLink]="['/detail', fileName]"><img [src]="_thumbUrl"/></a>
+<mat-grid-list id="grid-list" cols="1">
+  <mat-grid-tile *ngFor="let fileName of fileNames">
+    <a [routerLink]="['/detail', fileName]"><img [src]="_thumbUrl"/></a>
+  </mat-grid-tile>
+</mat-grid-list>

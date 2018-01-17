@@ -42,7 +42,7 @@
     <mat-grid-list cols="6" rowHeight="6:3" gutterSize="15px">
       <mat-grid-tile
         *ngFor="let sim of similarGHD">
-        <a [routerLink]="['/detail', sim.fileName]"><<img [src]=sim.thumbUrl [alt]=sim.distance></a>
+        <a [routerLink]="['/detail', sim.fileName]"><img [src]=sim.thumbUrl [alt]=sim.distance></a>
         <mat-grid-tile-footer>
           <p>{{sim.distance}}</p>
         </mat-grid-tile-footer>
@@ -53,7 +53,7 @@
     <mat-grid-list cols="6" rowHeight="6:3" gutterSize="15px">
       <mat-grid-tile
         *ngFor="let sim of similarHOG">
-        <a [routerLink]="['/detail', sim.fileName]"><<img [src]=sim.thumbUrl [alt]=sim.distance></a>
+        <a [routerLink]="['/detail', sim.fileName]"><img [src]=sim.thumbUrl [alt]=sim.distance></a>
         <mat-grid-tile-footer>
           <p>{{sim.distance}}</p>
         </mat-grid-tile-footer>

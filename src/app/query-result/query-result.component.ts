@@ -16,12 +16,14 @@ export class QueryResultComponent implements OnInit {
 
   private _results: Object;
   private _table: SparqlResult[][] = [];
+  private _headers: string[] = [];
 
   constructor(private communication: CompCommunicationService) {
   }
 
   ngOnInit() {
     this._results = this.communication.sparqlResult;
+    this._headers = this.communication.sparqlHeaders;
     this.parseResult();
   }
 
