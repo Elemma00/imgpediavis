@@ -1,13 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import {SparqlResultComponent} from '../sparql-result/sparql-result.component';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-sparql-result-url',
   templateUrl: './sparql-result-url.component.html',
   styleUrls: ['./sparql-result-url.component.css']
 })
-export class SparqlResultUrlComponent extends SparqlResultComponent {
+export class SparqlResultUrlComponent implements OnInit {
 
+  @Input() value: string;
+
+  constructor() {
+  }
+
+  ngOnInit() {}
 }
 
 

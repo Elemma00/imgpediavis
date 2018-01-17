@@ -1,19 +1,38 @@
-import { Component, OnInit } from '@angular/core';
-import {SparqlResultComponent} from '../sparql-result/sparql-result.component';
+import {Component, Input, OnInit} from '@angular/core';
+import {MainService} from '../../../main.service';
 
 @Component({
   selector: 'app-sparql-result-image',
   templateUrl: './sparql-result-image.component.html',
-  styleUrls: ['./sparql-result-image.component.css']
+  styleUrls: ['./sparql-result-image.component.css'],
 })
-export class SparqlResultImageComponent extends SparqlResultComponent {
+export class SparqlResultImageComponent implements OnInit {
 
-  private _fileName: string;
 
-  constructor(value: string) {
-    super(value);
-    const s = value.split('/');
-    this._fileName = s[s.length - 1];
+  @Input() value: string;
+  fileName: string;
+  private _imgUrl: string;
+  private _thumbUrl: string;
+
+  constructor(private service: MainService) {
+  }
+
+  ngOnInit() {
+    const s = this.value.split('/');
+    this.fileName = s[s.length - 1];
+    this.getImgUrl();
+  }
+
+  getImgUrl() {
+    this.service.getImgUrl(this.fileName, 200).subscribe(res => {
+      const pages = res.query.pages;
+      for (const key in pages) {
+        if (pages.hasOwnProperty(key)) {
+          this._imgUrl = pages[key].imageinfo[0].url;
+          this._thumbUrl = pages[key].imageinfo[0].thumburl;
+        }
+      }
+    });
   }
 }
 

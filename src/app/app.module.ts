@@ -15,18 +15,18 @@ import { MatToolbarModule } from '@angular/material';
 
 /* App components */
 import { AppComponent } from './app.component';
+import { MainComponent } from './main/main.component';
 import { ImgDetailComponent } from './img-detail/img-detail.component';
 import { QueryResultComponent } from './query-result/query-result.component';
+import { SparqlResultImageComponent } from './query-result/results/sparql-result-image/sparql-result-image.component';
+import { SparqlResultUrlComponent } from './query-result/results/sparql-result-url/sparql-result-url.component';
+import { SparqlResultValComponent } from './query-result/results/sparql-result-val/sparql-result-val.component';
 
 
 /* App services */
 import {MainService} from './main.service';
-import { MainComponent } from './main/main.component';
 import {CompCommunicationService} from './comp-communication.service';
-import { SparqlResultComponent } from './query-result/results/sparql-result/sparql-result.component';
-import { SparqlResultImageComponent } from './query-result/results/sparql-result-image/sparql-result-image.component';
-import { SparqlResultUrlComponent } from './query-result/results/sparql-result-url/sparql-result-url.component';
-import { SparqlResultValComponent } from './query-result/results/sparql-result-val/sparql-result-val.component';
+
 
 const routes: Routes = [
   {path: '', component: MainComponent},
@@ -41,8 +41,9 @@ const routes: Routes = [
     ImgDetailComponent,
     QueryResultComponent,
     MainComponent,
-    SparqlResultComponent,
-    SparqlResultUrlComponent
+    SparqlResultUrlComponent,
+    SparqlResultImageComponent,
+    SparqlResultValComponent
   ],
   imports: [
     BrowserModule,
@@ -55,10 +56,7 @@ const routes: Routes = [
     MatGridListModule,
     MatToolbarModule,
     MatTabsModule,
-    DynamicModule.withComponents([SparqlResultComponent, SparqlResultUrlComponent])
-  ],
-  entryComponents: [
-    SparqlResultUrlComponent,
+    DynamicModule.withComponents([SparqlResultUrlComponent, SparqlResultImageComponent, SparqlResultValComponent])
   ],
   providers: [MainService, CompCommunicationService],
   bootstrap: [AppComponent]
