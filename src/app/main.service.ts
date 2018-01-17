@@ -28,7 +28,6 @@ export class MainService {
   }
 
   getSimilarImgInfo(similars: string[], thumbWidht: number): Observable<WikiApiConsult> {
-
     if (similars.length > Constants.MAX_WIKI_REQUEST) {
         console.error('[MainService:getSimilarImgInfo] Exceeded maximum number of files to request (max: ' +
           Constants.MAX_WIKI_REQUEST + ', requested: ' + similars.length + ')');
@@ -43,5 +42,18 @@ export class MainService {
     titles = titles.substr(0, titles.length - 1);
     return this.http.get<WikiApiConsult>(Constants.WIKI_API_IMAGE_INFO.replace('%', titles).replace('%', '' + thumbWidht),
       {headers: Constants.CORS_HEADER});
+  }
+
+  getImgpediaSparqlQuery(query: string): Observable<Object> {
+    const cleanQuery = query
+      .replace(/ /g, '+')
+      .replace(/\?/g, '%3F')
+      .replace(/{/g, '%7B')
+      .replace(/}/g, '%7D')
+      .replace(/:/g, '%3A')
+      .replace(/\//g, '%2F')
+      .replace(/#/g, '%23')
+      .replace(/;/g, '%3B');
+    return this.http.get(Constants.IMGPEDIA_URL_QUERY + cleanQuery, {headers: Constants.CORS_HEADER});
   }
 }
