@@ -5,7 +5,7 @@ export class SimilarInfo {
   private _distance: number;
 
   constructor(fileName: string, distance: number) {
-    this._fileName = fileName.split(':')[1].replace(/ /g, '_');
+    this._fileName = 'http:' + fileName.split(':')[1].replace(/ /g, '_');
     this._distance = distance;
   }
 
@@ -13,8 +13,13 @@ export class SimilarInfo {
     return this._distance;
   }
 
-  get fileName(): string {
+  get fileNameUrl(): string {
     return this._fileName;
+  }
+  
+  get fileName(): string {
+    const s = this._fileName.split('/');
+    return s[s.length - 1];
   }
 
   get thumbUrl(): string {

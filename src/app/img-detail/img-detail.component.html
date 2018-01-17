@@ -9,14 +9,14 @@
 
       <p *ngIf="detail.height"><b>Height:</b>{{detail.height}}</p>
 
-      <div *ngIf="detail.associatedWith">
+      <div *ngIf="detail.associatedWith && detail.associatedWith.length > 0">
         <b>Associated with</b>
         <div *ngFor="let associated of detail.associatedWith">
           <a [href]=associated>{{associated}}</a>
         </div>
       </div>
 
-      <div *ngIf="detail.appearsIn">
+      <div *ngIf="detail.appearsIn && detail.appearsIn.length > 0">
         <b>Appears in</b>
         <div *ngFor="let appear of detail.appearsIn">
           <a [href]=appear>{{appear}}</a>
@@ -30,24 +30,33 @@
   <mat-tab label="CLD">
     <mat-grid-list cols="6" rowHeight="6:3" gutterSize="15px">
       <mat-grid-tile
-        *ngFor="let key of keysCLD()">
-        <img [src]=similarCLD[key].thumbUrl [alt]=similarCLD[key].distance>
+        *ngFor="let sim of similarCLD">
+        <a [routerLink]="['/detail', sim.fileName]"><img [src]="sim.thumbUrl" [alt]="sim.distance"></a>
+        <mat-grid-tile-footer>
+          <p>{{sim.distance}}</p>
+        </mat-grid-tile-footer>
       </mat-grid-tile>
     </mat-grid-list>
   </mat-tab>
   <mat-tab label="GHD">
     <mat-grid-list cols="6" rowHeight="6:3" gutterSize="15px">
       <mat-grid-tile
-        *ngFor="let key of keysGHD()">
-        <img [src]=similarGHD[key].thumbUrl [alt]=similarGHD[key].distance>
+        *ngFor="let sim of similarGHD">
+        <a [routerLink]="['/detail', sim.fileName]"><<img [src]=sim.thumbUrl [alt]=sim.distance></a>
+        <mat-grid-tile-footer>
+          <p>{{sim.distance}}</p>
+        </mat-grid-tile-footer>
       </mat-grid-tile>
     </mat-grid-list>
   </mat-tab>
   <mat-tab label="HOG">
     <mat-grid-list cols="6" rowHeight="6:3" gutterSize="15px">
       <mat-grid-tile
-        *ngFor="let key of keysHOG()">
-        <img [src]=similarHOG[key].thumbUrl [alt]=similarHOG[key].distance>
+        *ngFor="let sim of similarHOG">
+        <a [routerLink]="['/detail', sim.fileName]"><<img [src]=sim.thumbUrl [alt]=sim.distance></a>
+        <mat-grid-tile-footer>
+          <p>{{sim.distance}}</p>
+        </mat-grid-tile-footer>
       </mat-grid-tile>
     </mat-grid-list>
   </mat-tab>

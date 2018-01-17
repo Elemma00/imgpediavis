@@ -20,9 +20,9 @@ export class ImgDetailComponent implements OnInit {
 
   private similarsNames: string[] = [];
 
-  private similarCLD: { [id: string]: SimilarInfo } = {};
-  private similarGHD: { [id: string]: SimilarInfo } = {};
-  private similarHOG: { [id: string]: SimilarInfo } = {};
+  private similarCLD: SimilarInfo[];
+  private similarGHD: SimilarInfo[];
+  private similarHOG: SimilarInfo[];
 
 
   constructor(private service: MainService, private route: ActivatedRoute) {
@@ -33,45 +33,34 @@ export class ImgDetailComponent implements OnInit {
       this.detail = new ImgDetailInfo();
       this.detail.fileName = params['filename'];
       this.similarsNames = [];
-      this.similarCLD = {};
-      this.similarGHD = {};
-      this.similarHOG = {};
+      this.similarCLD = [];
+      this.similarGHD = [];
+      this.similarHOG = [];
       this.getImg();
       this.getImgInfoAndBindings();
     });
   }
 
-  keysCLD() {
-    return Object.keys(this.similarCLD);
-  }
-
-  keysGHD() {
-    return Object.keys(this.similarGHD);
-  }
-
-  keysHOG() {
-    return Object.keys(this.similarHOG);
-  }
-
   addBinding(binding: Binding): void {
     if (binding.desc.value.localeCompare(Constants.IMGPEDIA_IMG_DESC_CLD) === 0) {
-      this.similarCLD[binding.target.value] = new SimilarInfo(binding.target.value, +binding.dist.value);
+      this.similarCLD.push(new SimilarInfo(binding.target.value, +binding.dist.value));
     } else if (binding.desc.value.localeCompare(Constants.IMGPEDIA_IMG_DESC_GHD) === 0) {
-      this.similarGHD[binding.target.value] = new SimilarInfo(binding.target.value, +binding.dist.value);
+      this.similarGHD.push(new SimilarInfo(binding.target.value, +binding.dist.value));
     } else if (binding.desc.value.localeCompare(Constants.IMGPEDIA_IMG_DESC_HOG) === 0) {
-      this.similarHOG[binding.target.value] = new SimilarInfo(binding.target.value, +binding.dist.value);
+      this.similarHOG.push(new SimilarInfo(binding.target.value, +binding.dist.value));
     }
     this.similarsNames.push(binding.target.value);
   }
 
   addBindingUrl(page: Page): void {
+    let index: number;
     const title: string = Constants.IMGPEDIA_URL_RESOURCE + page.title.split(':')[1].replace(/ /g, '_');
-    if (this.similarCLD.hasOwnProperty(title)) {
-      this.similarCLD[title].thumbUrl = page.imageinfo[0].thumburl;
-    } else if (this.similarGHD.hasOwnProperty(title)) {
-      this.similarGHD[title].thumbUrl = page.imageinfo[0].thumburl;
-    } else if (this.similarHOG.hasOwnProperty(title)) {
-      this.similarHOG[title].thumbUrl = page.imageinfo[0].thumburl;
+    if ((index = this.similarCLD.findIndex(sim => sim.fileNameUrl === title)) !== -1) {
+      this.similarCLD[index].thumbUrl = page.imageinfo[0].thumburl;
+    } else if ((index = this.similarGHD.findIndex( sim => sim.fileNameUrl === title)) !== -1) {
+      this.similarGHD[index].thumbUrl = page.imageinfo[0].thumburl;
+    } else if ((index = this.similarHOG.findIndex( sim => sim.fileNameUrl === title)) !== -1) {
+      this.similarHOG[index].thumbUrl = page.imageinfo[0].thumburl;
     }
   }
 
@@ -85,9 +74,19 @@ export class ImgDetailComponent implements OnInit {
                   this.addBindingUrl(pages[key]);
                 }
               }
+              this.sortSimilarsByDistance();
             },
           );
       }
+  }
+
+  sortSimilarsByDistance(): void {
+    const compareFunction = function(a: SimilarInfo, b: SimilarInfo): number {
+      return a.distance - b.distance;
+    };
+    this.similarCLD.sort(compareFunction);
+    this.similarHOG.sort(compareFunction);
+    this.similarGHD.sort(compareFunction);
   }
 
   getImg(): void {
