@@ -1,0 +1,10 @@
+#image {
+  position: center;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+#inputText {
+  width: 500px;
+  position: center;
+}

@@ -1,0 +1,11 @@
+<table>
+  <th *ngFor="let head of _headers">
+    {{head}}
+  </th>
+  <tr *ngFor="let row of _table">
+    <td *ngFor="let col of row">
+      <ndc-dynamic [ndcDynamicComponent]="col.cls"
+                   [ndcDynamicInputs]="{value: col.value}"></ndc-dynamic>
+    </td>
+  </tr>
+</table>
