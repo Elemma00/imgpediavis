@@ -1,0 +1,63 @@
+<mat-toolbar color="primary">
+  <span>{{detail.fileName}}</span>
+</mat-toolbar>
+<br>
+<mat-card style="width: 50%; margin-left: 25%">
+    <a [href]=detail.originalUrl><img mat-card-image [src]=detail.thumbUrl></a>
+    <mat-card-content>
+      <p><b>File: </b>{{detail.fileName}}</p>
+
+      <p *ngIf="detail.height"><b>Height:</b>{{detail.height}}</p>
+
+      <div *ngIf="detail.associatedWith && detail.associatedWith.length > 0">
+        <b>Associated with</b>
+        <div *ngFor="let associated of detail.associatedWith">
+          <a [href]=associated>{{associated}}</a>
+        </div>
+      </div>
+
+      <div *ngIf="detail.appearsIn && detail.appearsIn.length > 0">
+        <b>Appears in</b>
+        <div *ngFor="let appear of detail.appearsIn">
+          <a [href]=appear>{{appear}}</a>
+        </div>
+      </div>
+
+    </mat-card-content>
+</mat-card>
+
+<mat-tab-group>
+  <mat-tab label="CLD">
+    <mat-grid-list cols="6" rowHeight="6:3" gutterSize="15px">
+      <mat-grid-tile
+        *ngFor="let sim of similarCLD">
+        <a [routerLink]="['/detail', sim.fileName]"><img [src]="sim.thumbUrl" [alt]="sim.distance"></a>
+        <mat-grid-tile-footer>
+          <p>{{sim.distance}}</p>
+        </mat-grid-tile-footer>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-tab>
+  <mat-tab label="GHD">
+    <mat-grid-list cols="6" rowHeight="6:3" gutterSize="15px">
+      <mat-grid-tile
+        *ngFor="let sim of similarGHD">
+        <a [routerLink]="['/detail', sim.fileName]"><<img [src]=sim.thumbUrl [alt]=sim.distance></a>
+        <mat-grid-tile-footer>
+          <p>{{sim.distance}}</p>
+        </mat-grid-tile-footer>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-tab>
+  <mat-tab label="HOG">
+    <mat-grid-list cols="6" rowHeight="6:3" gutterSize="15px">
+      <mat-grid-tile
+        *ngFor="let sim of similarHOG">
+        <a [routerLink]="['/detail', sim.fileName]"><<img [src]=sim.thumbUrl [alt]=sim.distance></a>
+        <mat-grid-tile-footer>
+          <p>{{sim.distance}}</p>
+        </mat-grid-tile-footer>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-tab>
+</mat-tab-group>
