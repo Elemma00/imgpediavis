@@ -17,7 +17,17 @@ export class MainComponent implements OnInit {
     private service: MainService,
     private communication: CompCommunicationService,
     private router: Router) {
-    this.textValue = '';
+    this.textValue = 'SELECT ?source ?dbp ?wiki ?target ?desc ?dist WHERE{\n' +
+      '?rel <http://imgpedia.dcc.uchile.cl/ontology#sourceImage> ?source ;\n' +
+      '    <http://imgpedia.dcc.uchile.cl/ontology#targetImage> ?target ;\n' +
+      '    <http://imgpedia.dcc.uchile.cl/ontology#usesDescriptorType> ?desc ;\n' +
+      '    <http://imgpedia.dcc.uchile.cl/ontology#distance> ?dist .\n' +
+      'FILTER(?source = URI(\'http://imgpedia.dcc.uchile.cl/resource/HaHaskalaa011.jpg\'))\n' +
+      'OPTIONAL{\n' +
+      '?source <http://imgpedia.dcc.uchile.cl/ontology#associatedWith> ?dbp .\n' +
+      '?source <http://imgpedia.dcc.uchile.cl/ontology#appearsIn> ?wiki .\n' +
+      '}\n' +
+      '}';
   }
 
   ngOnInit() {

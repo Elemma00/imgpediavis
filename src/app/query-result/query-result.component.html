@@ -1,4 +1,4 @@
-<table>
+<!--<table>
   <th *ngFor="let head of _headers">
     {{head}}
   </th>
@@ -8,4 +8,16 @@
                    [ndcDynamicInputs]="{value: col.value}"></ndc-dynamic>
     </td>
   </tr>
-</table>
+</table>-->
+<mat-grid-list cols="6" rowHeight="50px" gutterSize="10px">
+  <mat-grid-tile *ngFor="let head of _headers">
+    <h4>{{head}}</h4>
+  </mat-grid-tile>
+</mat-grid-list>
+<mat-grid-list cols="6" rowHeight="6:3" gutterSize="10px">
+  <mat-grid-tile
+    *ngFor="let result of _table">
+    <ndc-dynamic [ndcDynamicComponent]="result.cls"
+                 [ndcDynamicInputs]="{value: result.value}"></ndc-dynamic>
+  </mat-grid-tile>
+</mat-grid-list>
