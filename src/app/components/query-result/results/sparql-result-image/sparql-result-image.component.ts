@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MainService} from '../../../main.service';
+import {MainService} from '../../../../services/main.service';
 
 @Component({
   selector: 'app-sparql-result-image',

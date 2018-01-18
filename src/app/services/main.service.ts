@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 
-import {Constants} from './model/constants.model';
-import {ImgpediaBindingQueryResult} from './model/imgpedia-image-binding-query.model';
-import {ImgpediaDetailQueryResult} from './model/imgpedia-image-detail-query.model';
-import {WikiApiConsult} from './model/wiki-api-image-info.model';
+import {Constants} from '../models/constants.model';
+import {ImgpediaBindingQueryResult} from '../models/imgpedia-image-binding-query.model';
+import {ImgpediaDetailQueryResult} from '../models/imgpedia-image-detail-query.model';
+import {WikiApiConsult} from '../models/wiki-api-image-info.model';
 
 
 

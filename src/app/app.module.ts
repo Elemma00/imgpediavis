@@ -14,18 +14,18 @@ import { MatGridListModule } from '@angular/material';
 import { MatToolbarModule } from '@angular/material';
 
 /* App components */
-import { AppComponent } from './app.component';
-import { MainComponent } from './main/main.component';
-import { ImgDetailComponent } from './img-detail/img-detail.component';
-import { QueryResultComponent } from './query-result/query-result.component';
-import { SparqlResultImageComponent } from './query-result/results/sparql-result-image/sparql-result-image.component';
-import { SparqlResultUrlComponent } from './query-result/results/sparql-result-url/sparql-result-url.component';
-import { SparqlResultValComponent } from './query-result/results/sparql-result-val/sparql-result-val.component';
+import { AppComponent } from './components/app/app.component';
+import { MainComponent } from './components/main/main.component';
+import { ImgDetailComponent } from './components/img-detail/img-detail.component';
+import { QueryResultComponent } from './components/query-result/query-result.component';
+import { SparqlResultImageComponent } from './components/query-result/results/sparql-result-image/sparql-result-image.component';
+import { SparqlResultUrlComponent } from './components/query-result/results/sparql-result-url/sparql-result-url.component';
+import { SparqlResultValComponent } from './components/query-result/results/sparql-result-val/sparql-result-val.component';
 
 
 /* App services */
-import {MainService} from './main.service';
-import {CompCommunicationService} from './comp-communication.service';
+import {MainService} from './services/main.service';
+import {CompCommunicationService} from './services/comp-communication.service';
 
 
 const routes: Routes = [

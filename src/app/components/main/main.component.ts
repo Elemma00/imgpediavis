@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import {MainService} from '../main.service';
+import {MainService} from '../../services/main.service';
 import {Router} from '@angular/router';
-import {CompCommunicationService} from '../comp-communication.service';
+import {CompCommunicationService} from '../../services/comp-communication.service';
 
 @Component({
   selector: 'app-main',

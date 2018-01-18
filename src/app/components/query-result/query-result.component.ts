@@ -1,9 +1,9 @@
-import {Component, Injectable, InjectionToken, Injector, OnInit, ReflectiveInjector} from '@angular/core';
-import {CompCommunicationService} from '../comp-communication.service';
+import {Component, OnInit} from '@angular/core';
+import {CompCommunicationService} from '../../services/comp-communication.service';
 
-import {SparqlResult} from '../model/sparql-result.model';
+import {SparqlResult} from '../../models/sparql-result.model';
 import {SparqlResultUrlComponent} from './results/sparql-result-url/sparql-result-url.component';
-import {Constants} from '../model/constants.model';
+import {Constants} from '../../models/constants.model';
 import {SparqlResultValComponent} from './results/sparql-result-val/sparql-result-val.component';
 import {SparqlResultImageComponent} from './results/sparql-result-image/sparql-result-image.component';
 

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Binding } from '../model/imgpedia-image-binding-query.model';
-import { Constants } from '../model/constants.model';
-import { ImgDetailInfo } from '../model/img-detail-info.model';
-import { MainService } from '../main.service';
-import { SimilarInfo } from '../model/similar-info.model';
-import { Page } from '../model/wiki-api-image-info.model';
+import { Binding } from '../../models/imgpedia-image-binding-query.model';
+import { Constants } from '../../models/constants.model';
+import { ImgDetailInfo } from '../../models/img-detail-info.model';
+import { MainService } from '../../services/main.service';
+import { SimilarInfo } from '../../models/similar-info.model';
+import { Page } from '../../models/wiki-api-image-info.model';
 
 
 @Component({
