@@ -46,6 +46,7 @@ export class MainService {
 
   getImgpediaSparqlQuery(query: string): Observable<Object> {
     const cleanQuery = query
+      .replace(/\n/g, '')
       .replace(/ /g, '+')
       .replace(/\?/g, '%3F')
       .replace(/{/g, '%7B')

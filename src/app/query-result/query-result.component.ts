@@ -15,7 +15,7 @@ import {SparqlResultImageComponent} from './results/sparql-result-image/sparql-r
 export class QueryResultComponent implements OnInit {
 
   private _results: Object;
-  private _table: SparqlResult[][] = [];
+  private _table: SparqlResult[] = [];
   private _headers: string[] = [];
 
   constructor(private communication: CompCommunicationService) {
@@ -25,25 +25,30 @@ export class QueryResultComponent implements OnInit {
     this._results = this.communication.sparqlResult;
     this._headers = this.communication.sparqlHeaders;
     this.parseResult();
+    console.log(this._table);
+  }
+
+  headerLength(): number {
+    return this._headers.length;
   }
 
   parseResult() {
     for (const index in this._results) {
       if (this._results.hasOwnProperty(index)) {
         const res = this._results[index];
-        const resComp: SparqlResult[] = [];
-        for (const key in res) {
-          if (res.hasOwnProperty(key)) {
-            if (Constants.IMAGE_FORMATS.indexOf(res[key]['value'].substr(res[key]['value'].lastIndexOf('.') + 1, 3).toLowerCase()) !== -1) {
-              resComp.push({cls: SparqlResultImageComponent, value: <string>res[key]['value']});
-            } else if (res[key]['type'].localeCompare('typed-literal') === 0) {
-              resComp.push({cls: SparqlResultValComponent, value: <string>res[key]['value']});
+        for (const key in this._headers) {
+          if (res.hasOwnProperty(this._headers[key])) {
+            if (Constants.IMAGE_FORMATS.indexOf(res[this._headers[key]]['value'].substr(res[this._headers[key]]['value'].lastIndexOf('.') + 1, 3).toLowerCase()) !== -1) {
+              this._table.push({cls: SparqlResultImageComponent, value: <string>res[this._headers[key]]['value']});
+            } else if (res[this._headers[key]]['type'].localeCompare('typed-literal') === 0) {
+              this._table.push({cls: SparqlResultValComponent, value: <string>res[this._headers[key]]['value']});
             } else {
-              resComp.push({cls: SparqlResultUrlComponent, value: <string>res[key]['value']});
+              this._table.push({cls: SparqlResultUrlComponent, value: <string>res[this._headers[key]]['value']});
             }
+          } else {
+            this._table.push({cls: SparqlResultValComponent, value: 'NO-DATA'});
           }
         }
-        this._table.push(resComp);
       }
     }
   }

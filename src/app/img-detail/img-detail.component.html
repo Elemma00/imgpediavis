@@ -27,37 +27,17 @@
 </mat-card>
 
 <mat-tab-group>
-  <mat-tab label="CLD">
-    <mat-grid-list cols="6" rowHeight="6:3" gutterSize="15px">
-      <mat-grid-tile
-        *ngFor="let sim of similarCLD">
-        <a [routerLink]="['/detail', sim.fileName]"><img [src]="sim.thumbUrl" [alt]="sim.distance"></a>
-        <mat-grid-tile-footer>
-          <p>{{sim.distance}}</p>
-        </mat-grid-tile-footer>
-      </mat-grid-tile>
-    </mat-grid-list>
-  </mat-tab>
-  <mat-tab label="GHD">
-    <mat-grid-list cols="6" rowHeight="6:3" gutterSize="15px">
-      <mat-grid-tile
-        *ngFor="let sim of similarGHD">
-        <a [routerLink]="['/detail', sim.fileName]"><img [src]=sim.thumbUrl [alt]=sim.distance></a>
-        <mat-grid-tile-footer>
-          <p>{{sim.distance}}</p>
-        </mat-grid-tile-footer>
-      </mat-grid-tile>
-    </mat-grid-list>
-  </mat-tab>
-  <mat-tab label="HOG">
-    <mat-grid-list cols="6" rowHeight="6:3" gutterSize="15px">
-      <mat-grid-tile
-        *ngFor="let sim of similarHOG">
-        <a [routerLink]="['/detail', sim.fileName]"><img [src]=sim.thumbUrl [alt]=sim.distance></a>
-        <mat-grid-tile-footer>
-          <p>{{sim.distance}}</p>
-        </mat-grid-tile-footer>
-      </mat-grid-tile>
-    </mat-grid-list>
-  </mat-tab>
+  <div *ngFor="let desc of getDescriptors()">
+    <mat-tab label={{formatDescriptorName(desc)}}>
+      <mat-grid-list cols="6" rowHeight="6:3" gutterSize="15px">
+        <mat-grid-tile
+          *ngFor="let sim of descriptors[desc]">
+          <a [routerLink]="['/detail', sim.fileName]"><img [src]="sim.thumbUrl" [alt]="sim.distance"></a>
+          <mat-grid-tile-footer>
+            <p>{{sim.distance}}</p>
+          </mat-grid-tile-footer>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-tab>
+  </div>
 </mat-tab-group>
