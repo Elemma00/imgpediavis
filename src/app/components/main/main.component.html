@@ -1,12 +1,14 @@
-<div id="image">
-  <img src="assets/img/imgpedia.png" height="200px">
-</div>
-<div id="search">
-  <textarea [(ngModel)]="textValue" id="inputText" placeholder="Search!" rows="5"></textarea>
+<div class="row">
+  <div id="image" class="col-2 no-pad-marg">
+    <img src="assets/img/imgpedia.png" width="100%">
+  </div>
+  <div class="col-9 no-pad-marg">
+    <textarea [(ngModel)]="textValue" id="inputText" placeholder="Search!" rows="10"></textarea>
+  </div>
+  <div class="col-1 no-pad-marg">
+    <button class="full" (click)="runQuery()">Sparql Query</button>
+  </div>
 </div>
 <br>
-<div>
-  <button (click)="runQuery()">Sparql Query</button>
-</div>
 <app-query-result *ngIf="headers && headers.length > 0 &&
-                         results && results.length > 0" [headers]="headers" [results]="results"></app-query-result>
+                        results && results.length > 0" [headers]="headers" [results]="results"></app-query-result>
