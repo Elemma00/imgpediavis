@@ -48,5 +48,7 @@ export class Constants {
   /* Image formats available in imgpedia */
   static IMAGE_FORMATS: string[] = ['jpg', 'jpeg', 'png'];
 
+  static URL_VALUES = [Constants.IMGPEDIA_URL + '/ontology#'];
+
 
 }
