@@ -43,7 +43,7 @@ export class QueryResultComponent implements OnInit {
               this._table.push({cls: SparqlResultUrlComponent, value: <string>res[this.headers[key]]['value']});
             }
           } else {
-            this._table.push({cls: SparqlResultValComponent, value: 'NO-DATA'});
+            this._table.push({cls: SparqlResultValComponent, value: '----'});
           }
         }
       }

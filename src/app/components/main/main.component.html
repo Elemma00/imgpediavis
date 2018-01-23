@@ -1,6 +1,6 @@
 <div class="row">
-  <div id="image" class="col-2 no-pad-marg">
-    <img src="assets/img/imgpedia.png" width="100%">
+  <div class="col-2 no-pad-marg">
+    <img src="assets/img/imgpedia-min.png" width="90%" id="image" style="margin-left: 7%">
   </div>
   <div class="col-9 no-pad-marg">
     <textarea [(ngModel)]="textValue" id="inputText" placeholder="Search!" rows="10"></textarea>
@@ -9,6 +9,5 @@
     <button class="full" (click)="runQuery()">Sparql Query</button>
   </div>
 </div>
-<br>
 <app-query-result *ngIf="headers && headers.length > 0 &&
                         results && results.length > 0" [headers]="headers" [results]="results"></app-query-result>

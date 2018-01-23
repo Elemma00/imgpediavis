@@ -1,8 +1,10 @@
+<hr>
 <mat-grid-list cols="{{headerLength()}}" rowHeight="50px" gutterSize="10px">
   <mat-grid-tile *ngFor="let head of headers">
     <h4>{{head}}</h4>
   </mat-grid-tile>
 </mat-grid-list>
+<hr>
 <mat-grid-list cols="{{headerLength()}}" rowHeight="6:3" gutterSize="10px">
   <mat-grid-tile
     *ngFor="let result of _table">

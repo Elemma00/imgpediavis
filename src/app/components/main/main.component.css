@@ -3,15 +3,20 @@
 }
 
 .full {
-  width: 100%;
+  width: 85%;
   height: 100%;
 }
 
 .no-pad-marg {
   padding: 0;
-  margin: 0;
+  margin: 0.2% 0 0 0;
 }
 
 #inputText {
   min-width: 100%;
+}
+
+#image {
+  margin-top: 25%;
+  position: center;
 }
