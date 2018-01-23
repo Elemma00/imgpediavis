@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {CompCommunicationService} from '../../services/comp-communication.service';
+import {Component, Input, OnInit} from '@angular/core';
 
 import {SparqlResult} from '../../models/sparql-result.model';
 import {SparqlResultUrlComponent} from './results/sparql-result-url/sparql-result-url.component';
@@ -14,36 +13,34 @@ import {SparqlResultImageComponent} from './results/sparql-result-image/sparql-r
 })
 export class QueryResultComponent implements OnInit {
 
-  private _results: Object;
+  @Input() headers: string[] = [];
+  @Input() results: Object;
   private _table: SparqlResult[] = [];
-  private _headers: string[] = [];
 
-  constructor(private communication: CompCommunicationService) {
-  }
+  constructor() {}
 
   ngOnInit() {
-    this._results = this.communication.sparqlResult;
-    this._headers = this.communication.sparqlHeaders;
-    this.parseResult();
-    console.log(this._table);
+    if (this.headers && this.headers.length > 0 && this.results && Object.keys(this.results).length > 0) {
+      this.parseResult();
+    }
   }
 
   headerLength(): number {
-    return this._headers.length;
+    return this.headers.length;
   }
 
   parseResult() {
-    for (const index in this._results) {
-      if (this._results.hasOwnProperty(index)) {
-        const res = this._results[index];
-        for (const key in this._headers) {
-          if (res.hasOwnProperty(this._headers[key])) {
-            if (Constants.IMAGE_FORMATS.indexOf(res[this._headers[key]]['value'].substr(res[this._headers[key]]['value'].lastIndexOf('.') + 1, 3).toLowerCase()) !== -1) {
-              this._table.push({cls: SparqlResultImageComponent, value: <string>res[this._headers[key]]['value']});
-            } else if (res[this._headers[key]]['type'].localeCompare('typed-literal') === 0) {
-              this._table.push({cls: SparqlResultValComponent, value: <string>res[this._headers[key]]['value']});
+    for (const index in this.results) {
+      if (this.results.hasOwnProperty(index)) {
+        const res = this.results[index];
+        for (const key in this.headers) {
+          if (res.hasOwnProperty(this.headers[key])) {
+            if (Constants.IMAGE_FORMATS.indexOf(res[this.headers[key]]['value'].substr(res[this.headers[key]]['value'].lastIndexOf('.') + 1, 3).toLowerCase()) !== -1) {
+              this._table.push({cls: SparqlResultImageComponent, value: <string>res[this.headers[key]]['value']});
+            } else if (res[this.headers[key]]['type'].localeCompare('typed-literal') === 0) {
+              this._table.push({cls: SparqlResultValComponent, value: <string>res[this.headers[key]]['value']});
             } else {
-              this._table.push({cls: SparqlResultUrlComponent, value: <string>res[this._headers[key]]['value']});
+              this._table.push({cls: SparqlResultUrlComponent, value: <string>res[this.headers[key]]['value']});
             }
           } else {
             this._table.push({cls: SparqlResultValComponent, value: 'NO-DATA'});

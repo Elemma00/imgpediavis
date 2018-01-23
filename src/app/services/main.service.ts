@@ -55,6 +55,6 @@ export class MainService {
       .replace(/\//g, '%2F')
       .replace(/#/g, '%23')
       .replace(/;/g, '%3B');
-    return this.http.get(Constants.IMGPEDIA_URL_QUERY + cleanQuery, {headers: Constants.CORS_HEADER});
+    return this.http.get(Constants.IMGPEDIA_URL_QUERY + query, {headers: Constants.CORS_HEADER});
   }
 }

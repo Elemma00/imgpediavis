@@ -6,5 +6,7 @@
 </div>
 <br>
 <div>
-  <button (click)="runSparqlQuery()">Sparql Query</button>
+  <button (click)="runQuery()">Sparql Query</button>
 </div>
+<app-query-result *ngIf="headers && headers.length > 0 &&
+                         results && results.length > 0" [headers]="headers" [results]="results"></app-query-result>

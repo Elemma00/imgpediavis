@@ -4,7 +4,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
-import {Routes, RouterModule} from '@angular/router';
+import {Routes, RouterModule, UrlSerializer} from '@angular/router';
 import { MatTabsModule } from '@angular/material';
 import { DynamicModule } from 'ng-dynamic-component';
 
@@ -27,10 +27,11 @@ import { SparqlResultValComponent } from './components/query-result/results/spar
 import {MainService} from './services/main.service';
 import {CompCommunicationService} from './services/comp-communication.service';
 
+import {CustomUrlSerializer} from './utils/custom-url.serializer';
+
 
 const routes: Routes = [
-  {path: '', component: MainComponent},
-  {path: 'query', component: QueryResultComponent},
+  {path: 'query', component: MainComponent},
   {path: 'detail/:filename', component: ImgDetailComponent},
 ];
 
@@ -58,7 +59,11 @@ const routes: Routes = [
     MatTabsModule,
     DynamicModule.withComponents([SparqlResultUrlComponent, SparqlResultImageComponent, SparqlResultValComponent])
   ],
-  providers: [MainService, CompCommunicationService],
+  providers: [
+    MainService,
+    CompCommunicationService,
+    { provide: UrlSerializer, useClass: CustomUrlSerializer }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

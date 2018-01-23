@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import {MainService} from '../../services/main.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {CompCommunicationService} from '../../services/comp-communication.service';
 
 @Component({
@@ -12,8 +12,23 @@ import {CompCommunicationService} from '../../services/comp-communication.servic
 export class MainComponent implements OnInit {
 
   textValue: string;
+  headers: Object;
+  results: Object;
+  private _query: string;
 
-  constructor(
+  static parseQuery(query: string): string {
+    return query.replace(/\n/g, '')
+      .replace(/ /g, '+')
+      .replace(/\?/g, '%3F')
+      .replace(/{/g, '%7B')
+      .replace(/}/g, '%7D')
+      .replace(/:/g, '%3A')
+      .replace(/\//g, '%2F')
+      .replace(/#/g, '%23')
+      .replace(/;/g, '%3B');
+  }
+
+  constructor(private route: ActivatedRoute,
     private service: MainService,
     private communication: CompCommunicationService,
     private router: Router) {
@@ -31,21 +46,30 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      if (params['q'] && params['q'].length > 0) {
+        this._query = MainComponent.parseQuery(params['q']);
+        this.runSparqlQuery();
+      }
+    });
+  }
+
+  runQuery() {
+    if (this.textValue && this.textValue.length > 0) {
+      this.router.navigate(['query', {q: MainComponent.parseQuery(this.textValue)}]);
+    }
   }
 
   runSparqlQuery() {
-    if (this.textValue && this.textValue.length > 0) {
-      this.service.getImgpediaSparqlQuery(this.textValue).subscribe(
+      this.service.getImgpediaSparqlQuery(this._query).subscribe(
         res => {
-          this.communication.saveSparqlHeader(res['head']['vars']);
-          this.communication.saveSparqlResult(res['results']['bindings']);
-          this.router.navigate(['query']);
+          this.headers = res['head']['vars'];
+          this.results = res['results']['bindings'];
         },
         error => {
           console.error(error);
         }
       );
-    }
   }
 }
 
