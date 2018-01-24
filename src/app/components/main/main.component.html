@@ -9,5 +9,9 @@
     <button class="full" (click)="runQuery()">Sparql Query</button>
   </div>
 </div>
-<app-query-result *ngIf="headers && headers.length > 0 &&
+<div *ngIf="errorMessage && !headers && !results" class="alert alert-danger">
+  <strong>ERROR</strong>
+  <pre>{{errorMessage}}</pre>
+</div>
+<app-query-result *ngIf="!errorMessage && headers && headers.length > 0 &&
                         results && results.length > 0" [headers]="headers" [results]="results"></app-query-result>

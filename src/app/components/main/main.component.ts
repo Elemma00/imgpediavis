@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {MainService} from '../../services/main.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CompCommunicationService} from '../../services/comp-communication.service';
+import {errorSymbol} from '@angular/compiler-cli/src/metadata/evaluator';
 
 @Component({
   selector: 'app-main',
@@ -14,6 +15,8 @@ export class MainComponent implements OnInit {
   textValue: string;
   headers: Object;
   results: Object;
+  errorMessage: string;
+
   private _query: string;
 
   static parseQuery(query: string): string {
@@ -67,9 +70,21 @@ export class MainComponent implements OnInit {
         res => {
           this.headers = res['head']['vars'];
           this.results = res['results']['bindings'];
+          if (this.errorMessage) {
+            this.errorMessage = null;
+          }
         },
         error => {
-          console.error(error);
+          if (this.headers && this.results) {
+            this.headers = null;
+            this.results = null;
+          }
+          if (error.status === 400) {
+            this.errorMessage = error.error.substr(error.error.indexOf('SPARQL'));
+          }
+          if (error.status === 500) {
+            this.errorMessage = 'Internal server error';
+          }
         }
       );
   }
