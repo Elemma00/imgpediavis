@@ -19,7 +19,7 @@ export class MainComponent implements OnInit {
 
   private _query: string;
 
-  static parseQuery(query: string): string {
+  static parseQueryToUrl(query: string): string {
     return query.replace(/\n/g, '')
       .replace(/ /g, '+')
       .replace(/\?/g, '%3F')
@@ -31,27 +31,31 @@ export class MainComponent implements OnInit {
       .replace(/;/g, '%3B');
   }
 
+  static parseQueryToText(query: string): string {
+    return query
+      .replace(/\+/g, ' ')
+      .replace(/%3F/g, '?')
+      .replace(/%7B/g, '{')
+      .replace(/%7D/g, '}')
+      .replace(/%3A/g, ':')
+      .replace(/%2F/g, '/')
+      .replace(/%23/g, '#')
+      .replace(/%3B/g, ';')
+      .replace(/;/g, ';\n')
+      .replace(/ \./g, ' .\n');
+  }
+
   constructor(private route: ActivatedRoute,
     private service: MainService,
     private communication: CompCommunicationService,
     private router: Router) {
-    this.textValue = 'SELECT ?source ?dbp ?wiki ?target ?desc ?dist WHERE{\n' +
-      '?rel <http://imgpedia.dcc.uchile.cl/ontology#sourceImage> ?source ;\n' +
-      '    <http://imgpedia.dcc.uchile.cl/ontology#targetImage> ?target ;\n' +
-      '    <http://imgpedia.dcc.uchile.cl/ontology#usesDescriptorType> ?desc ;\n' +
-      '    <http://imgpedia.dcc.uchile.cl/ontology#distance> ?dist .\n' +
-      'FILTER(?source = URI(\'http://imgpedia.dcc.uchile.cl/resource/HaHaskalaa011.jpg\'))\n' +
-      'OPTIONAL{\n' +
-      '?source <http://imgpedia.dcc.uchile.cl/ontology#associatedWith> ?dbp .\n' +
-      '?source <http://imgpedia.dcc.uchile.cl/ontology#appearsIn> ?wiki .\n' +
-      '}\n' +
-      '}';
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       if (params['q'] && params['q'].length > 0) {
-        this._query = MainComponent.parseQuery(params['q']);
+        this._query = MainComponent.parseQueryToUrl(params['q']);
+        this.textValue = MainComponent.parseQueryToText(this._query);
         this.runSparqlQuery();
       } else {
         this._query = null;
@@ -61,7 +65,7 @@ export class MainComponent implements OnInit {
 
   runQuery() {
     if (this.textValue && this.textValue.length > 0) {
-      this.router.navigate(['query', {q: MainComponent.parseQuery(this.textValue)}]);
+      this.router.navigate(['query', {q: MainComponent.parseQueryToUrl(this.textValue)}]);
     }
   }
 
