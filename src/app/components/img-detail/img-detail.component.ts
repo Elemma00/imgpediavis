@@ -53,21 +53,19 @@ export class ImgDetailComponent implements OnInit {
     this.similarsNames.push(binding.target.value);
   }
 
-  addBindingUrl(page: Page): void {
-    let index: number;
+  addBindingUrl(page: Page, key: number): void {
+    let i: number;
     const title: string = Constants.IMGPEDIA_URL_RESOURCE + page.title.split(':')[1].replace(/ /g, '_');
     for (const desc in this.descriptors) {
       if (this.descriptors.hasOwnProperty(desc)) {
-        if ((index = this.descriptors[desc].findIndex(sim => sim.fileNameUrl === title)) !== -1) {
-          if (page.imageinfo) {
-            this.descriptors[desc][index].thumbUrl = page.imageinfo[0].thumburl;
-            if (!page.imageinfo) {
-              console.log(page);
+        for (i = 0; i < this.descriptors[desc].length; i++) {
+          if (this.descriptors[desc][i].fileNameUrl === title) {
+            if (key >= 0) {
+              this.descriptors[desc][i].thumbUrl = page.imageinfo[0].thumburl;
+            } else {
+              this.descriptors[desc][i].thumbUrl = Constants.IMG_MISSING_URL;
             }
-          } else {
-            this.descriptors[desc][index].thumbUrl = Constants.IMG_MISSING_URL;
           }
-          return;
         }
       }
     }
@@ -79,8 +77,8 @@ export class ImgDetailComponent implements OnInit {
           .subscribe( res => {
               const pages = res.query.pages;
               for (const key in pages) {
-                if (+key > 0 && pages.hasOwnProperty(key)) {
-                  this.addBindingUrl(pages[key]);
+                if (pages.hasOwnProperty(key)) {
+                  this.addBindingUrl(pages[key], +key);
                 }
               }
               this.sortSimilarsByDistance();
