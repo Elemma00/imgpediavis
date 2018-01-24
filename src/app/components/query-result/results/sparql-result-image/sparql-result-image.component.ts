@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MainService} from '../../../../services/main.service';
+import {Constants} from '../../../../models/constants.model';
 
 @Component({
   selector: 'app-sparql-result-image',
@@ -26,7 +27,11 @@ export class SparqlResultImageComponent implements OnInit {
       const pages = res.query.pages;
       for (const key in pages) {
         if (pages.hasOwnProperty(key)) {
-          this._thumbUrl = pages[key].imageinfo[0].thumburl;
+          if (pages[key].imageinfo[0].thumburl) {
+            this._thumbUrl = pages[key].imageinfo[0].thumburl;
+          } else {
+            this._thumbUrl = Constants.IMG_MISSING_URL;
+          }
         }
       }
     });

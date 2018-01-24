@@ -5,6 +5,8 @@ export class Constants {
   /* Maximun number of titles to request in a single Wikimedia API request */
   static MAX_WIKI_REQUEST = 100;
 
+  static IMG_MISSING_URL = 'assets/img/missing-min.png';
+
 
   /** ================================= WIKIMEDIA =============================================== **/
   static WIKIMEDIA_API_URL = 'https://commons.wikimedia.org/w/api.php';

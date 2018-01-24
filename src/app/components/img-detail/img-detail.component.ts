@@ -59,7 +59,14 @@ export class ImgDetailComponent implements OnInit {
     for (const desc in this.descriptors) {
       if (this.descriptors.hasOwnProperty(desc)) {
         if ((index = this.descriptors[desc].findIndex(sim => sim.fileNameUrl === title)) !== -1) {
-          this.descriptors[desc][index].thumbUrl = page.imageinfo[0].thumburl;
+          if (page.imageinfo) {
+            this.descriptors[desc][index].thumbUrl = page.imageinfo[0].thumburl;
+            if (!page.imageinfo) {
+              console.log(page);
+            }
+          } else {
+            this.descriptors[desc][index].thumbUrl = Constants.IMG_MISSING_URL;
+          }
           return;
         }
       }
@@ -100,7 +107,11 @@ export class ImgDetailComponent implements OnInit {
         for (const key in pages) {
           if (pages.hasOwnProperty(key)) {
             this.detail.originalUrl = pages[key].imageinfo[0].url;
-            this.detail.thumbUrl = pages[key].imageinfo[0].thumburl;
+            if (pages[key].imageinfo[0].thumburl) {
+              this.detail.thumbUrl = pages[key].imageinfo[0].thumburl;
+            } else {
+              this.detail.thumbUrl = Constants.IMG_MISSING_URL;
+            }
           }
         }
       }

@@ -50,6 +50,8 @@ export class MainComponent implements OnInit {
       if (params['q'] && params['q'].length > 0) {
         this._query = MainComponent.parseQuery(params['q']);
         this.runSparqlQuery();
+      } else {
+        this._query = null;
       }
     });
   }
