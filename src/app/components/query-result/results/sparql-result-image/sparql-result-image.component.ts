@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MainService} from '../../../../services/main.service';
+import {HttpService} from '../../../../services/http.service';
 import {Constants} from '../../../../models/constants.model';
 
 @Component({
@@ -14,7 +14,7 @@ export class SparqlResultImageComponent implements OnInit {
   fileNames: string[] = [];
   private _thumbUrl: string;
 
-  constructor(private service: MainService) { }
+  constructor(private http: HttpService) { }
 
   ngOnInit() {
     const s = this.value.split('/');
@@ -23,7 +23,7 @@ export class SparqlResultImageComponent implements OnInit {
   }
 
   getImgUrl() {
-    this.service.getImgUrl(this.fileNames[0], 300).subscribe(res => {
+    this.http.getImgUrl(this.fileNames[0], 300).subscribe(res => {
       const pages = res.query.pages;
       for (const key in pages) {
         if (pages.hasOwnProperty(key)) {

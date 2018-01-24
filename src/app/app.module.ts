@@ -25,8 +25,7 @@ import { SparqlResultValComponent } from './components/query-result/results/spar
 
 
 /* App services */
-import {MainService} from './services/main.service';
-import {CompCommunicationService} from './services/comp-communication.service';
+import {HttpService} from './services/http.service';
 
 import {CustomUrlSerializer} from './utils/custom-url.serializer';
 
@@ -61,8 +60,7 @@ const routes: Routes = [
     DynamicModule.withComponents([SparqlResultUrlComponent, SparqlResultImageComponent, SparqlResultValComponent])
   ],
   providers: [
-    MainService,
-    CompCommunicationService,
+    HttpService,
     { provide: UrlSerializer, useClass: CustomUrlSerializer }
   ],
   bootstrap: [AppComponent]

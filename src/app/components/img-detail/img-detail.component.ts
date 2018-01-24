@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Binding } from '../../models/imgpedia-image-binding-query.model';
 import { Constants } from '../../models/constants.model';
 import { ImgDetailInfo } from '../../models/img-detail-info.model';
-import { MainService } from '../../services/main.service';
+import { HttpService } from '../../services/http.service';
 import { SimilarInfo } from '../../models/similar-info.model';
 import { Page } from '../../models/wiki-api-image-info.model';
 
@@ -22,7 +22,7 @@ export class ImgDetailComponent implements OnInit {
 
   private descriptors: {[id: string]: SimilarInfo[]} = {};
 
-  constructor(private service: MainService, private route: ActivatedRoute) {
+  constructor(private http: HttpService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -73,7 +73,7 @@ export class ImgDetailComponent implements OnInit {
 
   getSimilarUrls(similars: string[]): void {
     for (let i = 0, j = similars.length; i < j; i += Constants.MAX_WIKI_REQUEST) {
-        this.service.getSimilarImgInfo(similars.slice(i, i + Constants.MAX_WIKI_REQUEST), window.screen.width / 4)
+        this.http.getSimilarImgInfo(similars.slice(i, i + Constants.MAX_WIKI_REQUEST), window.screen.width / 4)
           .subscribe( res => {
               const pages = res.query.pages;
               for (const key in pages) {
@@ -99,7 +99,7 @@ export class ImgDetailComponent implements OnInit {
   }
 
   getImg(): void {
-    this.service.getImgUrl(this.detail.fileName, window.screen.width / 2).subscribe(
+    this.http.getImgUrl(this.detail.fileName, window.screen.width / 2).subscribe(
       res => {
         const pages = res.query.pages;
         for (const key in pages) {
@@ -115,7 +115,7 @@ export class ImgDetailComponent implements OnInit {
       }
     );
 
-    this.service.getImgInfo(this.detail.fileName).subscribe(
+    this.http.getImgInfo(this.detail.fileName).subscribe(
       res => {
         const results = res.results.bindings;
         for (const key in results) {
@@ -133,7 +133,7 @@ export class ImgDetailComponent implements OnInit {
   }
 
   getImgInfoAndBindings(): void {
-    this.service.getImgBindings(this.detail.fileName).subscribe(
+    this.http.getImgBindings(this.detail.fileName).subscribe(
       res => {
         const bindings = res.results.bindings;
         if (bindings.length > 0) {

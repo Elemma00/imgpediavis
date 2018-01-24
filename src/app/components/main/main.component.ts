@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import {MainService} from '../../services/main.service';
+import {HttpService} from '../../services/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {CompCommunicationService} from '../../services/comp-communication.service';
-import {errorSymbol} from '@angular/compiler-cli/src/metadata/evaluator';
 
 @Component({
   selector: 'app-main',
@@ -46,8 +44,7 @@ export class MainComponent implements OnInit {
   }
 
   constructor(private route: ActivatedRoute,
-    private service: MainService,
-    private communication: CompCommunicationService,
+    private http: HttpService,
     private router: Router) {
   }
 
@@ -70,7 +67,7 @@ export class MainComponent implements OnInit {
   }
 
   runSparqlQuery() {
-      this.service.getImgpediaSparqlQuery(this._query).subscribe(
+      this.http.getImgpediaSparqlQuery(this._query).subscribe(
         res => {
           this.headers = res['head']['vars'];
           this.results = res['results']['bindings'];

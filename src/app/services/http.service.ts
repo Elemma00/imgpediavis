@@ -10,7 +10,7 @@ import {WikiApiConsult} from '../models/wiki-api-image-info.model';
 
 
 @Injectable()
-export class MainService {
+export class HttpService {
   constructor(private http: HttpClient) {}
 
   getImgUrl(fileName: string, thumbWidth: number): Observable<WikiApiConsult> {
@@ -29,7 +29,7 @@ export class MainService {
 
   getSimilarImgInfo(similars: string[], thumbWidht: number): Observable<WikiApiConsult> {
     if (similars.length > Constants.MAX_WIKI_REQUEST) {
-        console.error('[MainService:getSimilarImgInfo] Exceeded maximum number of files to request (max: ' +
+        console.error('[HttpService:getSimilarImgInfo] Exceeded maximum number of files to request (max: ' +
           Constants.MAX_WIKI_REQUEST + ', requested: ' + similars.length + ')');
         return null;
     }
