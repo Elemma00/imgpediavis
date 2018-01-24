@@ -1,0 +1,12 @@
+.dist-desc {
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s linear;
+  word-wrap: break-word;
+}
+
+.binding:hover + .dist-desc {
+  opacity: 1;
+  transition: all 0.3s linear;
+  visibility: visible;
+}

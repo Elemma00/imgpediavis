@@ -32,8 +32,8 @@
       <mat-grid-list cols="6" rowHeight="6:3" gutterSize="15px">
         <mat-grid-tile
           *ngFor="let sim of descriptors[desc]">
-          <a [routerLink]="['/detail', sim.fileName]"><img [src]="sim.thumbUrl" [alt]="sim.distance"></a>
-          <mat-grid-tile-footer>
+          <a [routerLink]="['/detail', sim.fileName]" class="binding"><img [src]="sim.thumbUrl" [alt]="sim.distance"></a>
+          <mat-grid-tile-footer class="dist-desc">
             <p>{{sim.distance}}</p>
           </mat-grid-tile-footer>
         </mat-grid-tile>
