@@ -27,7 +27,7 @@ export class SparqlResultImageComponent implements OnInit {
       const pages = res.query.pages;
       for (const key in pages) {
         if (pages.hasOwnProperty(key)) {
-          if (pages[key].imageinfo[0].thumburl) {
+          if (+key >= 0) {
             this._thumbUrl = pages[key].imageinfo[0].thumburl;
           } else {
             this._thumbUrl = Constants.IMG_MISSING_URL;
