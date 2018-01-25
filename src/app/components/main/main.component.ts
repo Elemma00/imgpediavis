@@ -52,7 +52,9 @@ export class MainComponent implements OnInit {
     this.route.params.subscribe(params => {
       if (params['q'] && params['q'].length > 0) {
         this._query = MainComponent.parseQueryToUrl(params['q']);
-        this.textValue = MainComponent.parseQueryToText(this._query);
+        if (!this.textValue) {
+          this.textValue = MainComponent.parseQueryToText(this._query);
+        }
         this.runSparqlQuery();
       } else {
         this._query = null;
