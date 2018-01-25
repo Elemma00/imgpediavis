@@ -42,8 +42,9 @@ export class ResultColImageComponent implements OnInit {
   }
 
   getImgsUrls() {
-    for (let i = 0, j = this._fileNames.length; i < j; i += Constants.MAX_WIKI_REQUEST) {
-      this.http.getSimilarImgInfo(Array.from(this._fileNames).slice(i, i + Constants.MAX_WIKI_REQUEST), 300).subscribe(res => {
+    const a_fileNames = Array.from(this._fileNames);
+    for (let i = 0, j = a_fileNames.length; i < j; i += Constants.MAX_WIKI_REQUEST) {
+      this.http.getSimilarImgInfo(a_fileNames.slice(i, i + Constants.MAX_WIKI_REQUEST), 300).subscribe(res => {
         const pages = res.query.pages;
         for (const key in pages) {
           if (pages.hasOwnProperty(key)) {
