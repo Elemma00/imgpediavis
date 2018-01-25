@@ -45,16 +45,6 @@ export class HttpService {
   }
 
   getImgpediaSparqlQuery(query: string): Observable<Object> {
-    const cleanQuery = query
-      .replace(/\n/g, '')
-      .replace(/ /g, '+')
-      .replace(/\?/g, '%3F')
-      .replace(/{/g, '%7B')
-      .replace(/}/g, '%7D')
-      .replace(/:/g, '%3A')
-      .replace(/\//g, '%2F')
-      .replace(/#/g, '%23')
-      .replace(/;/g, '%3B');
     return this.http.get(Constants.IMGPEDIA_URL_QUERY + query, {headers: Constants.CORS_HEADER});
   }
 }

@@ -26,7 +26,8 @@ export class MainComponent implements OnInit {
       .replace(/:/g, '%3A')
       .replace(/\//g, '%2F')
       .replace(/#/g, '%23')
-      .replace(/;/g, '%3B');
+      .replace(/;/g, '%3B')
+      .replace(/¿/g, '%3B');
   }
 
   static parseQueryToText(query: string): string {
@@ -41,6 +42,18 @@ export class MainComponent implements OnInit {
       .replace(/%3B/g, ';')
       .replace(/;/g, ';\n')
       .replace(/ \./g, ' .\n');
+  }
+
+  static parseTextToUrl(text: string): string {
+    return text
+      .replace(/ /g, '+')
+      .replace(/\?/g, '%3F')
+      .replace(/{/g, '%7B')
+      .replace(/}/g, '%7D')
+      .replace(/:/g, '%3A')
+      .replace(/\//g, '%2F')
+      .replace(/#/g, '%23')
+      .replace(/;/g, '¿');
   }
 
   constructor(private route: ActivatedRoute,
@@ -76,7 +89,7 @@ export class MainComponent implements OnInit {
 
   runQuery() {
     if (this.textValue && this.textValue.length > 0) {
-      this.router.navigateByUrl('/query;q=' + MainComponent.parseQueryToUrl(this.textValue));
+      this.router.navigateByUrl('/query;q=' + MainComponent.parseTextToUrl(this.textValue));
     }
   }
 
