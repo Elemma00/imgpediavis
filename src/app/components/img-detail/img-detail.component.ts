@@ -16,7 +16,7 @@ import { Page } from '../../models/wiki-api-image-info.model';
 })
 export class ImgDetailComponent implements OnInit {
 
-  private detail: ImgDetailInfo = new ImgDetailInfo();
+  detail: ImgDetailInfo = new ImgDetailInfo();
 
   private similarsNames: string[] = [];
 

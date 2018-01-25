@@ -62,6 +62,14 @@ export class MainComponent implements OnInit {
     });
   }
 
+  headersLength(): number {
+    return Object.keys(this.headers).length;
+  }
+
+  resultsLength(): number {
+    return Object.keys(this.results).length;
+  }
+
   runQuery() {
     if (this.textValue && this.textValue.length > 0) {
       this.router.navigate(['query', {q: MainComponent.parseQueryToUrl(this.textValue)}]);

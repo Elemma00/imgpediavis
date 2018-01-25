@@ -3,6 +3,7 @@
     <img src="assets/img/imgpedia-min.png" style="height: 90%">
   </a>
   <strong>IMGpedia SPARQL Endpoint</strong>
+
 </mat-toolbar>
 <textarea [(ngModel)]="textValue" id="inputText" placeholder="Insert Sparql query..." rows="10"></textarea>
 <div class="query-btn">
@@ -12,5 +13,5 @@
   <strong>ERROR</strong>
   <pre>{{errorMessage}}</pre>
 </div>
-<app-query-result *ngIf="!errorMessage && headers && headers.length > 0 &&
-                        results && results.length > 0" [headers]="headers" [results]="results"></app-query-result>
+<app-query-result *ngIf="!errorMessage && headers && headersLength() > 0 &&
+                        results && resultsLength() > 0" [headers]="headers" [results]="results"></app-query-result>
