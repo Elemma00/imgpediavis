@@ -46,6 +46,11 @@ export class MainComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private http: HttpService,
     private router: Router) {
+
+    this.textValue = 'SELECT ?Source ?Target ?Distance WHERE{ ?Rel <http://imgpedia.dcc.uchile.cl/ontology#sourceImage> ?Source;\n' +
+      ' <http://imgpedia.dcc.uchile.cl/ontology#targetImage> ?Target;\n' +
+      ' <http://imgpedia.dcc.uchile.cl/ontology#distance> ?Distance .\n' +
+      '} LIMIT 10';
   }
 
   ngOnInit() {

@@ -30,10 +30,13 @@ import {HttpService} from './services/http.service';
 
 import {CustomUrlSerializer} from './utils/custom-url.serializer';
 import { ResultColNullComponent } from './components/query-result/result-col/null/result-col-null.component';
+import { IndexComponent } from './components/index/index.component';
 
 
 const routes: Routes = [
+  {path: '', component: IndexComponent},
   {path: 'query', component: MainComponent},
+  {path: 'query/:q', component: MainComponent},
   {path: 'detail/:filename', component: ImgDetailComponent},
 ];
 
@@ -47,7 +50,8 @@ const routes: Routes = [
     ResultColUrlComponent,
     ResultColImageComponent,
     ResultColValComponent,
-    ResultColNullComponent
+    ResultColNullComponent,
+    IndexComponent
   ],
   imports: [
     BrowserModule,
