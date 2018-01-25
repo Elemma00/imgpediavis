@@ -1,0 +1,12 @@
+<div *ngIf="thumbs && thumbs.length > 0">
+<mat-grid-list id="grid-list" cols="1">
+  <mat-grid-tile *ngFor="let t of thumbs">
+    <div *ngIf="t">
+      <a [routerLink]="['/detail', t.fileName]"><img [src]="t.thumb"/></a>
+    </div>
+    <div *ngIf="!t">
+      <p>----</p>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+</div>

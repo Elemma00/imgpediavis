@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SparqlResultValComponent } from './sparql-result-val.component';
+import { ResultColImageComponent } from './result-col-image.component';
 
-describe('SparqlResultValComponent', () => {
-  let component: SparqlResultValComponent;
-  let fixture: ComponentFixture<SparqlResultValComponent>;
+describe('ResultColImageComponent', () => {
+  let component: ResultColImageComponent;
+  let fixture: ComponentFixture<ResultColImageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SparqlResultValComponent ]
+      declarations: [ ResultColImageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SparqlResultValComponent);
+    fixture = TestBed.createComponent(ResultColImageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

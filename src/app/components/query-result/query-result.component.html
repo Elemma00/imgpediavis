@@ -5,10 +5,8 @@
   </mat-grid-tile>
 </mat-grid-list>
 <hr>
-<mat-grid-list cols="{{headerLength()}}" rowHeight="6:3" gutterSize="10px">
-  <mat-grid-tile
-    *ngFor="let result of _table">
-    <ndc-dynamic [ndcDynamicComponent]="result.cls"
-                 [ndcDynamicInputs]="{value: result.value}"></ndc-dynamic>
-  </mat-grid-tile>
-</mat-grid-list>
+<div *ngFor="let k of columnsKeys()" [ngStyle]="{'width': colWidth}" style="display: inline-grid;">
+  <ndc-dynamic [ndcDynamicComponent]="columns[k].cls"
+               [ndcDynamicInputs]="{values:columns[k].values}">
+  </ndc-dynamic>
+</div>

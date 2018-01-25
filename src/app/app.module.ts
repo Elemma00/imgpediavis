@@ -19,15 +19,16 @@ import { AppComponent } from './components/app/app.component';
 import { MainComponent } from './components/main/main.component';
 import { ImgDetailComponent } from './components/img-detail/img-detail.component';
 import { QueryResultComponent } from './components/query-result/query-result.component';
-import { SparqlResultImageComponent } from './components/query-result/results/sparql-result-image/sparql-result-image.component';
-import { SparqlResultUrlComponent } from './components/query-result/results/sparql-result-url/sparql-result-url.component';
-import { SparqlResultValComponent } from './components/query-result/results/sparql-result-val/sparql-result-val.component';
+import { ResultColImageComponent } from './components/query-result/result-col/image/result-col-image.component';
+import { ResultColUrlComponent } from './components/query-result/result-col/url/result-col-url.component';
+import { ResultColValComponent } from './components/query-result/result-col/val/result-col-val.component';
 
 
 /* App services */
 import {HttpService} from './services/http.service';
 
 import {CustomUrlSerializer} from './utils/custom-url.serializer';
+import { ResultColNullComponent } from './components/query-result/result-col/null/result-col-null.component';
 
 
 const routes: Routes = [
@@ -42,9 +43,10 @@ const routes: Routes = [
     ImgDetailComponent,
     QueryResultComponent,
     MainComponent,
-    SparqlResultUrlComponent,
-    SparqlResultImageComponent,
-    SparqlResultValComponent
+    ResultColUrlComponent,
+    ResultColImageComponent,
+    ResultColValComponent,
+    ResultColNullComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,7 @@ const routes: Routes = [
     MatGridListModule,
     MatToolbarModule,
     MatTabsModule,
-    DynamicModule.withComponents([SparqlResultUrlComponent, SparqlResultImageComponent, SparqlResultValComponent])
+    DynamicModule.withComponents([ResultColUrlComponent, ResultColImageComponent, ResultColValComponent, ResultColNullComponent])
   ],
   providers: [
     HttpService,
