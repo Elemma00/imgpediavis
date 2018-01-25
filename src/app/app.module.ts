@@ -10,6 +10,7 @@ import { DynamicModule } from 'ng-dynamic-component';
 
 
 /* Material */
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material';
 import { MatGridListModule } from '@angular/material';
 import { MatToolbarModule } from '@angular/material';
@@ -55,6 +56,7 @@ const routes: Routes = [
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(routes, {useHash: true}),
+    MatButtonModule,
     MatCardModule,
     MatGridListModule,
     MatToolbarModule,

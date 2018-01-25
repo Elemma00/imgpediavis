@@ -1,13 +1,12 @@
-<div class="row">
-  <div class="col-2 no-pad-marg">
-    <img src="assets/img/imgpedia-min.png" width="90%" id="image" style="margin-left: 7%">
-  </div>
-  <div class="col-9 no-pad-marg">
-    <textarea [(ngModel)]="textValue" id="inputText" placeholder="Search!" rows="10"></textarea>
-  </div>
-  <div class="col-1 no-pad-marg">
-    <button class="full" (click)="runQuery()">Sparql Query</button>
-  </div>
+<mat-toolbar color="primary" style="height: 100px">
+  <a href="/#/query" style="height: inherit; margin-right: 2%; margin-top: 20px; margin-bottom: 15px">
+    <img src="assets/img/imgpedia-min.png" style="height: 90%">
+  </a>
+  <strong>IMGpedia SPARQL Endpoint</strong>
+</mat-toolbar>
+<textarea [(ngModel)]="textValue" id="inputText" placeholder="Insert Sparql query..." rows="10"></textarea>
+<div class="query-btn">
+  <button mat-raised-button  color="primary" (click)="runQuery()">Run Query</button>
 </div>
 <div *ngIf="errorMessage && !headers && !results" class="alert alert-danger">
   <strong>ERROR</strong>

@@ -7,9 +7,8 @@
   height: 100%;
 }
 
-.no-pad-marg {
-  padding: 0;
-  margin: 0.2% 0 0 0;
+.query-btn {
+  margin-left: 50%;
 }
 
 #inputText {
