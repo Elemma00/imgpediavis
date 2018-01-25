@@ -6,6 +6,7 @@ export class Constants {
   static MAX_WIKI_REQUEST = 100;
 
   static IMG_MISSING_URL = 'assets/img/missing-min.png';
+  static IMG_MISSING_BIG_URL = 'assets/img/missing.png';
 
 
   /** ================================= WIKIMEDIA =============================================== **/

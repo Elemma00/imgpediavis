@@ -104,11 +104,12 @@ export class ImgDetailComponent implements OnInit {
         const pages = res.query.pages;
         for (const key in pages) {
           if (pages.hasOwnProperty(key)) {
-            this.detail.originalUrl = pages[key].imageinfo[0].url;
-            if (pages[key].imageinfo[0].thumburl) {
+            if (+key >= 0) {
+              this.detail.originalUrl = pages[key].imageinfo[0].url;
               this.detail.thumbUrl = pages[key].imageinfo[0].thumburl;
             } else {
-              this.detail.thumbUrl = Constants.IMG_MISSING_URL;
+              this.detail.thumbUrl = Constants.IMG_MISSING_BIG_URL;
+              this.detail.originalUrl = Constants.IMG_MISSING_BIG_URL;
             }
           }
         }
