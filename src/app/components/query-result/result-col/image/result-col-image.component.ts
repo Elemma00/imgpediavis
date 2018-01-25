@@ -42,27 +42,32 @@ export class ResultColImageComponent implements OnInit {
   }
 
   getImgsUrls() {
-    this.http.getSimilarImgInfo(Array.from(this._fileNames), 300).subscribe(res => {
-      const pages = res.query.pages;
-      for (const key in pages) {
-        if (pages.hasOwnProperty(key)) {
-          const indexes = this.getImageIndexes(pages[key].title);
-          if (+key >= 0) {
-            for (const i in indexes) {
-              if (indexes[i] < this.values.length) {
-                this.thumbs[indexes[i]] = {fileName: pages[key].title.substr(5).replace(/ /g, '_'), thumb: pages[key].imageinfo[0].thumburl};
+    for (let i = 0, j = this._fileNames.length; i < j; i += Constants.MAX_WIKI_REQUEST) {
+      this.http.getSimilarImgInfo(Array.from(this._fileNames).slice(i, i + Constants.MAX_WIKI_REQUEST), 300).subscribe(res => {
+        const pages = res.query.pages;
+        for (const key in pages) {
+          if (pages.hasOwnProperty(key)) {
+            const indexes = this.getImageIndexes(pages[key].title);
+            if (+key >= 0) {
+              for (const i in indexes) {
+                if (indexes[i] < this.values.length) {
+                  this.thumbs[indexes[i]] = {
+                    fileName: pages[key].title.substr(5).replace(/ /g, '_'),
+                    thumb: pages[key].imageinfo[0].thumburl
+                  };
+                }
               }
-            }
-          } else {
-            for (const i in indexes) {
-              if (indexes[i] < this.values.length) {
-                this.thumbs[indexes[i]] = {fileName: pages[key].title.substr(5), thumb: Constants.IMG_MISSING_URL};
+            } else {
+              for (const i in indexes) {
+                if (indexes[i] < this.values.length) {
+                  this.thumbs[indexes[i]] = {fileName: pages[key].title.substr(5), thumb: Constants.IMG_MISSING_URL};
+                }
               }
             }
           }
         }
-      }
-    });
+      });
+    }
   }
 }
 
