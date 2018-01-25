@@ -1,28 +1,28 @@
 <mat-toolbar color="primary" style="height: 100px">
-  <a href="/#/query" style="height: inherit; margin-right: 2%; margin-top: 20px; margin-bottom: 15px">
+  <a href="/query" style="height: inherit; margin-right: 2%; margin-top: 20px; margin-bottom: 15px">
     <img src="assets/img/imgpedia-min.png" style="height: 90%">
   </a>
-  <strong style="text-align: center">{{detail.fileName}}</strong>
+  <strong style="text-align: center; text-overflow: ellipsis">{{parseText(detail.fileName)}}</strong>
 </mat-toolbar>
 <br>
 <mat-card style="width: 50%; margin-left: 25%">
     <a [href]=detail.originalUrl><img mat-card-image [src]=detail.thumbUrl></a>
     <mat-card-content>
-      <p><b>File: </b>{{detail.fileName}}</p>
+      <p><b>File: </b>{{parseText(detail.fileName)}}</p>
 
       <p *ngIf="detail.height"><b>Height:</b>{{detail.height}}</p>
 
       <div *ngIf="detail.associatedWith && detail.associatedWith.length > 0">
         <b>Associated with</b>
-        <div *ngFor="let associated of detail.associatedWith">
-          <a [href]=associated>{{associated}}</a>
+        <div *ngFor="let associated of detail.associatedWith" style="text-overflow: ellipsis">
+          <a [href]=associated>{{parseText(associated)}}</a>
         </div>
       </div>
 
       <div *ngIf="detail.appearsIn && detail.appearsIn.length > 0">
         <b>Appears in</b>
         <div *ngFor="let appear of detail.appearsIn">
-          <a [href]=appear>{{appear}}</a>
+          <a [href]=appear>{{parseText(appear)}}</a>
         </div>
       </div>
 

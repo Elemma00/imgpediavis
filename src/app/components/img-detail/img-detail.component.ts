@@ -36,6 +36,11 @@ export class ImgDetailComponent implements OnInit {
     });
   }
 
+  parseText(text: string) {
+    return text
+      .replace(/_/g, ' ');
+  }
+
   getDescriptors(): string[] {
     return Object.keys(this.descriptors);
   }
