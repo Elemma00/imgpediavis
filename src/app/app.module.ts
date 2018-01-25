@@ -55,7 +55,7 @@ const routes: Routes = [
     FlexLayoutModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(routes, {useHash: true}),
+    RouterModule.forRoot(routes, {useHash: false}),
     MatButtonModule,
     MatCardModule,
     MatGridListModule,
