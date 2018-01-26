@@ -18,7 +18,9 @@ export class MainComponent implements OnInit {
   private _query: string;
 
   static parseQueryToUrl(query: string): string {
-    return query.replace(/\n/g, '')
+    return query
+      .replace(/IMGPEDIA/g, 'http://imgpedia.dcc.uchile.cl/')
+      .replace(/\n/g, '')
       .replace(/ /g, '+')
       .replace(/\?/g, '%3F')
       .replace(/{/g, '%7B')
@@ -46,6 +48,7 @@ export class MainComponent implements OnInit {
 
   static parseTextToUrl(text: string): string {
     return text
+      .replace(/http:\/\/imgpedia.dcc.uchile.cl\//g, 'IMGPEDIA')
       .replace(/ /g, '+')
       .replace(/\?/g, '%3F')
       .replace(/{/g, '%7B')

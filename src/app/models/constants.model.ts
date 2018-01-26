@@ -10,8 +10,6 @@ export class Constants {
 
 
   /** ================================= WIKIMEDIA =============================================== **/
-  static IMGPEDIA_URL = 'http://imgpedia.dcc.uchile.cl';
-
   static WIKIMEDIA_API_URL = 'https://commons.wikimedia.org/w/api.php';
 
   /* First replace '%' with a resource name like 'File:example.jpg' or 'File:example1.jpg|File:example2.jpg' */
@@ -20,6 +18,8 @@ export class Constants {
 
 
   /** ================================== IMGPEDIA =============================================== **/
+  static IMGPEDIA_URL = 'http://imgpedia.dcc.uchile.cl';
+
   static IMGPEDIA_URL_QUERY = Constants.IMGPEDIA_URL + '/sparql?default-graph-uri=http%3A%2F%2Fimgpedia.dcc.uchile.cl%2Fdataset%23this&format=json&timeout=0&debug=on&query=';
   /* Need to replace 'XXXX' with a resource name like 'example.jpg' */
   static IMGPEDIA_URL_IMAGE_DETAIL = Constants.IMGPEDIA_URL_QUERY + 'SELECT+%3Fdbp+%3Fwiki+WHERE%7B%0D%0AFILTER%28%3Fsource+%3D+URI%28%27http%3A%2F%2Fimgpedia.dcc.uchile.cl%2Fresource%2FXXXX%27%29%29%0D%0A%0D%0A%3Fsource+%3Chttp%3A%2F%2Fimgpedia.dcc.uchile.cl%2Fontology%23associatedWith%3E+%3Fdbp+.%0D%0A%3Fsource+%3Chttp%3A%2F%2Fimgpedia.dcc.uchile.cl%2Fontology%23appearsIn%3E+%3Fwiki+.%0D%0A%0D%0A%7D%0D%0A';
