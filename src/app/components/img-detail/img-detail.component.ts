@@ -88,6 +88,7 @@ export class ImgDetailComponent implements OnInit {
     for (let i = 0, j = similars.length; i < j; i += Constants.MAX_WIKI_REQUEST) {
         this.http.getSimilarImgInfo(similars.slice(i, i + Constants.MAX_WIKI_REQUEST), window.screen.width / 4)
           .subscribe( res => {
+            console.log(res);
               const pages = res.query.pages;
               for (const key in pages) {
                 if (pages.hasOwnProperty(key)) {
@@ -134,8 +135,13 @@ export class ImgDetailComponent implements OnInit {
         const results = res.results.bindings;
         for (const key in results) {
           if (results.hasOwnProperty(key)) {
-            this.detail.associatedWith.add(results[key].dbp.value);
-            this.detail.appearsIn.add(results[key].wiki.value);
+            const r = results[key];
+            if (r.dbp && r.dbp.value) {
+              this.detail.associatedWith.add(r.dbp.value);
+            }
+            if (r.wiki && r.wiki.value) {
+              this.detail.appearsIn.add(r.wiki.value);
+            }
           }
         }
       }
