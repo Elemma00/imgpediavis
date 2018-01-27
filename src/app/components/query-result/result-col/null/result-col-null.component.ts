@@ -11,7 +11,7 @@ export class ResultColNullComponent implements OnInit {
   @Input() values: string[];
   @Input() ncolumns: number;
   cells: Array<boolean>;
-  rowHeigth = Constants.QUERY_RESULT_ROW_HEIGHT;
+  rowHeight = Constants.QUERY_RESULT_ROW_HEIGHT;
 
   constructor() { }
 
