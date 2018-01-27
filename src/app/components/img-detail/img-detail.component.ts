@@ -104,7 +104,7 @@ export class ImgDetailComponent implements OnInit {
   }
 
   getImg(): void {
-    this.http.getImgUrl(this.detail.fileName, window.screen.width / 2).subscribe(
+    this.http.getImgUrl(this.detail.fileName, 400).subscribe(
       res => {
         const pages = res.query.pages;
         for (const key in pages) {

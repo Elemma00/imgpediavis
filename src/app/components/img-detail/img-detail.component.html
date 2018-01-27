@@ -1,12 +1,12 @@
-<mat-toolbar color="primary" style="height: 100px">
+<mat-toolbar color="primary" style="height: 50px; background: #5fd1da">
   <a href="/query" style="height: inherit; margin-right: 2%; margin-top: 20px; margin-bottom: 15px">
-    <img src="assets/img/imgpedia-min.png" style="height: 90%">
+    <img src="assets/img/imgpedia-min.png" style="height: 80%">
   </a>
   <strong style="text-align: center; text-overflow: ellipsis">{{parseText(detail.fileName)}}</strong>
 </mat-toolbar>
 <br>
 <mat-card style="width: 50%; margin-left: 25%">
-    <a [href]=detail.originalUrl><img mat-card-image [src]=detail.thumbUrl></a>
+    <a [href]=detail.originalUrl><img mat-card-image id="main-image" [src]=detail.thumbUrl></a>
     <mat-card-content>
       <p><b>File: </b>{{parseText(detail.fileName)}}</p>
 
