@@ -7,6 +7,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {Routes, RouterModule, UrlSerializer} from '@angular/router';
 import { MatTabsModule } from '@angular/material';
 import { DynamicModule } from 'ng-dynamic-component';
+import {AngularFittextModule} from 'angular-fittext';
 
 
 /* Material */
@@ -65,7 +66,8 @@ const routes: Routes = [
     MatGridListModule,
     MatToolbarModule,
     MatTabsModule,
-    DynamicModule.withComponents([ResultColUrlComponent, ResultColImageComponent, ResultColValComponent, ResultColNullComponent])
+    DynamicModule.withComponents([ResultColUrlComponent, ResultColImageComponent, ResultColValComponent, ResultColNullComponent]),
+    AngularFittextModule,
   ],
   providers: [
     HttpService,

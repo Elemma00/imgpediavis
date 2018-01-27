@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Constants} from '../../../../models/constants.model';
 
 @Component({
   selector: 'app-result-col-null',
@@ -8,7 +9,9 @@ import {Component, Input, OnInit} from '@angular/core';
 export class ResultColNullComponent implements OnInit {
 
   @Input() values: string[];
+  @Input() ncolumns: number;
   cells: Array<boolean>;
+  rowHeigth = Constants.QUERY_RESULT_ROW_HEIGHT;
 
   constructor() { }
 

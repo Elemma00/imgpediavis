@@ -7,6 +7,6 @@
 <hr>
 <div *ngFor="let k of columnsKeys()" [ngStyle]="{'width': colWidth}" style="display: inline-grid;">
   <ndc-dynamic [ndcDynamicComponent]="columns[k].cls"
-               [ndcDynamicInputs]="{values:columns[k].values}">
+               [ndcDynamicInputs]="{values:columns[k].values, ncolumns: headerLength()}">
   </ndc-dynamic>
 </div>

@@ -11,7 +11,9 @@ import {FilenameThumbnail} from '../../../../models/filename-thumbnail.model';
 export class ResultColImageComponent implements OnInit {
 
   @Input() values: string[];
+  @Input() ncolumns: number;
   thumbs: FilenameThumbnail[];
+  rowHeight = Constants.QUERY_RESULT_ROW_HEIGHT;
 
   private _fileNames: Set<string>;
 

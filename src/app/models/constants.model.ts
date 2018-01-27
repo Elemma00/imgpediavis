@@ -4,6 +4,7 @@ export class Constants {
   /** ================================= VALUES ================================================= **/
   /* Maximun number of titles to request in a single Wikimedia API request */
   static MAX_WIKI_REQUEST = 100;
+  static QUERY_RESULT_ROW_HEIGHT = '100px';
 
   static IMG_MISSING_URL = 'assets/img/missing-min.png';
   static IMG_MISSING_BIG_URL = 'assets/img/missing.png';

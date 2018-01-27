@@ -9,7 +9,9 @@ import {Constants} from '../../../../models/constants.model';
 export class ResultColValComponent implements OnInit {
 
   @Input() values: string[];
+  @Input() ncolumns: number;
   parsedValues: string[];
+  rowHeight = Constants.QUERY_RESULT_ROW_HEIGHT;
 
   constructor() {
     this.parsedValues = [];
