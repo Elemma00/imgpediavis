@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" style="height: 100px">
+<mat-toolbar color="primary" style="height: 50px; background: #5fd1da">
   <a href="/query" style="height: inherit; margin-right: 2%; margin-top: 20px; margin-bottom: 15px">
     <img src="assets/img/imgpedia-min.png" style="height: 90%">
   </a>
@@ -7,7 +7,7 @@
 </mat-toolbar>
 <textarea [(ngModel)]="textValue" id="inputText" placeholder="Insert Sparql query..." rows="10"></textarea>
 <div class="query-btn">
-  <button mat-raised-button  color="primary" (click)="runQuery()">Run Query</button>
+  <button mat-raised-button  color="primary" style="background-color: #5fd1da" (click)="runQuery()">Run Query</button>
 </div>
 <div *ngIf="errorMessage && !headers && !results" class="alert alert-danger">
   <strong>ERROR</strong>
