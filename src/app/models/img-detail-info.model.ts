@@ -2,12 +2,12 @@ export class ImgDetailInfo {
   fileName: string;
   originalUrl: string;
   thumbUrl: string;
-  associatedWith: string[];
-  appearsIn: string[];
+  associatedWith: Set<string>;
+  appearsIn: Set<string>;
   height: number;
 
   constructor() {
-    this.associatedWith = [];
-    this.appearsIn = [];
+    this.associatedWith = new Set<string>();
+    this.appearsIn = new Set<string>();
   }
 }

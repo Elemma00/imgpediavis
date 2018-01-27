@@ -50,6 +50,14 @@ export class ImgDetailComponent implements OnInit {
     return s[1].toUpperCase();
   }
 
+  associatedWith(): string[] {
+    return Array.from(this.detail.associatedWith);
+  }
+
+  appearsIn(): string[] {
+    return Array.from(this.detail.appearsIn);
+  }
+
   addBinding(binding: Binding): void {
     if (this.getDescriptors().indexOf(binding.desc.value) === -1) {
       this.descriptors[binding.desc.value] = [];
@@ -126,12 +134,8 @@ export class ImgDetailComponent implements OnInit {
         const results = res.results.bindings;
         for (const key in results) {
           if (results.hasOwnProperty(key)) {
-            if (this.detail.associatedWith.indexOf(results[key].dbp.value) === -1) {
-              this.detail.associatedWith.push(results[key].dbp.value);
-            }
-            if (this.detail.appearsIn.indexOf(results[key].wiki.value) === -1) {
-              this.detail.appearsIn.push(results[key].wiki.value);
-            }
+            this.detail.associatedWith.add(results[key].dbp.value);
+            this.detail.appearsIn.add(results[key].wiki.value);
           }
         }
       }

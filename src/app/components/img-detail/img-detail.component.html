@@ -12,16 +12,16 @@
 
       <p *ngIf="detail.height"><b>Height:</b>{{detail.height}}</p>
 
-      <div *ngIf="detail.associatedWith && detail.associatedWith.length > 0">
+      <div *ngIf="associatedWith().length > 0">
         <b>Associated with</b>
-        <div *ngFor="let associated of detail.associatedWith" style="text-overflow: ellipsis">
+        <div *ngFor="let associated of associatedWith()" style="text-overflow: ellipsis">
           <a [href]=associated>{{parseText(associated)}}</a>
         </div>
       </div>
 
-      <div *ngIf="detail.appearsIn && detail.appearsIn.length > 0">
+      <div *ngIf="appearsIn().length > 0">
         <b>Appears in</b>
-        <div *ngFor="let appear of detail.appearsIn">
+        <div *ngFor="let appear of appearsIn()">
           <a [href]=appear>{{parseText(appear)}}</a>
         </div>
       </div>
