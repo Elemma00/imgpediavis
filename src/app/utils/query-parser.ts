@@ -41,4 +41,18 @@ export class QueryParser {
       .replace(/#/g, '%23')
       .replace(/;/g, '¿');
   }
+
+  static parseTextToQuery(text: string): string {
+    return text
+      .replace(/\n/g, '%0D%0A')
+      .replace(/ /g, '+')
+      .replace(/\?/g, '%3F')
+      .replace(/{/g, '%7B')
+      .replace(/}/g, '%7D')
+      .replace(/:/g, '%3A')
+      .replace(/\//g, '%2F')
+      .replace(/#/g, '%23')
+      .replace(/;/g, '%3B')
+      .replace(/¿/g, '%3B');
+  }
 }

@@ -22,19 +22,39 @@ export class ResultColImageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.cleanValues();
     this.thumbs = new Array<FilenameThumbnail>(this.values.length);
     for (const v in this.values) {
       if (this.values.hasOwnProperty(v)) {
         const s = this.values[v].split('/');
-        this._fileNames.add(s[s.length - 1]);
+        const filename = s[s.length - 1];
+        let i;
+        if ((i = filename.indexOf('File:')) === 0) {
+          this._fileNames.add(filename.substr(5));
+        } else {
+          this._fileNames.add(filename);
+        }
       }
     }
     this.getImgsUrls();
   }
 
+  cleanValues() {
+    for (const v in this.values) {
+      if (this.values.hasOwnProperty(v)) {
+        const s = this.values[v].split('/');
+        let newValue = s[s.length - 1];
+        if (newValue.indexOf('File:') > -1) {
+          newValue = newValue.substr(5);
+        }
+        this.values[v] = newValue;
+      }
+    }
+  }
+
   getImageIndexes(title: string): number[] {
     const r: number[] = [];
-    const t = Constants.IMGPEDIA_URL + '/resource/' + title.substr(5).replace(/ /g, '_');
+    const t = title.substr(5).replace(/ /g, '_');
     for (let i = 0; i < this.values.length; i++) {
       if (this.values[i].localeCompare(t) === 0) {
         r.push(i);
@@ -52,23 +72,24 @@ export class ResultColImageComponent implements OnInit {
           if (pages.hasOwnProperty(key)) {
             const indexes = this.getImageIndexes(pages[key].title);
             if (+key >= 0) {
-              for (const i in indexes) {
-                if (indexes[i] < this.values.length) {
-                  this.thumbs[indexes[i]] = {
+              for (const k in indexes) {
+                if (indexes[k] < this.values.length) {
+                  this.thumbs[indexes[k]] = {
                     fileName: pages[key].title.substr(5).replace(/ /g, '_'),
                     thumb: pages[key].imageinfo[0].thumburl
                   };
                 }
               }
             } else {
-              for (const i in indexes) {
-                if (indexes[i] < this.values.length) {
-                  this.thumbs[indexes[i]] = {fileName: pages[key].title.substr(5), thumb: Constants.IMG_MISSING_URL};
+              for (const k in indexes) {
+                if (indexes[k] < this.values.length) {
+                  this.thumbs[indexes[k]] = {fileName: pages[key].title.substr(5), thumb: Constants.IMG_MISSING_URL};
                 }
               }
             }
           }
         }
+        console.log(this.thumbs);
       });
     }
   }

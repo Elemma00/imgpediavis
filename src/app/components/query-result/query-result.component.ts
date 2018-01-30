@@ -62,7 +62,7 @@ export class QueryResultComponent implements OnInit, OnChanges {
 
         if (Constants.IMAGE_FORMATS.indexOf(v.substr(v.lastIndexOf('.') + 1, 3).toLowerCase()) !== -1) {
           this.columns[this.headers[h]] = {cls: ResultColImageComponent, values: []};
-        } else if (first[this.headers[h]]['type'].localeCompare('typed-literal') === 0) {
+        } else if (first[this.headers[h]]['type'].localeCompare('typed-literal') === 0 || first[this.headers[h]]['type'].localeCompare('literal') === 0) {
           this.columns[this.headers[h]] = {cls: ResultColValComponent, values: []};
         } else {
           this.columns[this.headers[h]] = {cls: ResultColUrlComponent, values: []};
