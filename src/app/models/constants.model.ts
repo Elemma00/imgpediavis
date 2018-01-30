@@ -21,8 +21,7 @@ export class Constants {
   /** ================================== IMGPEDIA =============================================== **/
   static IMGPEDIA_URL = 'http://imgpedia.dcc.uchile.cl';
 
-  static IMGPEDIA_URL_QUERY = Constants.IMGPEDIA_URL + '/sparql?default-graph-uri=http%3A%2F%2Fimgpedia.dcc.uchile.cl%2Fdataset%23this&format=json&timeout=0&debug=on&query=';
-  static IMGPEDIA_URL_QUERY_NO_DEFAULT_DATASET = Constants.IMGPEDIA_URL + '/sparql?format=json&timeout=0&debug=on&query=';
+  static IMGPEDIA_URL_QUERY = Constants.IMGPEDIA_URL + '/sparql?default-graph-uri=&format=json&timeout=0&debug=on&query=';
 
   /* Need to replace 'XXXX' with a resource name like 'example.jpg' */
   static IMGPEDIA_URL_IMAGE_DETAIL = Constants.IMGPEDIA_URL_QUERY + 'SELECT+%3Fsource+%3Fdbp+%3Fwiki+WHERE{%0D%0AVALUES+%3Fsource+{<http%3A%2F%2Fimgpedia.dcc.uchile.cl%2Fresource%2FXXXX>}%0D%0AOPTIONAL{%0D%0A%3Fsource+<http%3A%2F%2Fimgpedia.dcc.uchile.cl%2Fontology%23associatedWith>+%3Fdbp+.%0D%0A%3Fsource+<http%3A%2F%2Fimgpedia.dcc.uchile.cl%2Fontology%23appearsIn>+%3Fwiki+.%0D%0A}%0D%0A}';

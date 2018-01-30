@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/share';
 
 import {Constants} from '../models/constants.model';
 import {ImgpediaBindingQueryResult} from '../models/imgpedia-image-binding-query.model';
@@ -28,7 +29,6 @@ export class HttpService {
   }
 
   getSimilarImgInfo(similars: string[], thumbWidht: number): Observable<WikiApiConsult> {
-    console.log(thumbWidht);
     if (similars.length > Constants.MAX_WIKI_REQUEST) {
         console.error('[HttpService:getSimilarImgInfo] Exceeded maximum number of files to request (max: ' +
           Constants.MAX_WIKI_REQUEST + ', requested: ' + similars.length + ')');
@@ -47,9 +47,5 @@ export class HttpService {
 
   getImgpediaSparqlQuery(query: string): Observable<Object> {
     return this.http.get(Constants.IMGPEDIA_URL_QUERY + query, {headers: Constants.CORS_HEADER});
-  }
-
-  getImgpediaSparqlQueryNoDefaultDataset(query: string): Observable<Object> {
-    return this.http.get(Constants.IMGPEDIA_URL_QUERY_NO_DEFAULT_DATASET + query, {headers: Constants.CORS_HEADER});
   }
 }

@@ -7,13 +7,8 @@
 </mat-toolbar>
 <textarea [(ngModel)]="textValue" id="inputText" placeholder="Insert Sparql query..." rows="10"></textarea>
 
-<div class="row">
-  <div class="offset-5 col-1">
-    <button mat-raised-button  color="primary" style="background-color: #5fd1da" (click)="runQuery()">Run Query</button>
-  </div>
-  <div class="offset-4 col-2">
-    <input type="checkbox" [(ngModel)]="defaultDataset"> IMGpedia dataset
-  </div>
+<div class="query-btn">
+  <button mat-raised-button  color="primary" style="background-color: #5fd1da" (click)="runQuery()">Run Query</button>
 </div>
 
 <div *ngIf="errorMessage && !headers && !results" class="alert alert-danger">

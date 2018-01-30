@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import {HttpService} from '../../services/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Location} from '@angular/common';
 
 import { QueryParser } from '../../utils/query-parser';
 
@@ -16,16 +17,13 @@ export class MainComponent implements OnInit {
   headers: Object;
   results: Object;
   errorMessage: string;
-  defaultDataset: boolean;
 
   private _query: string;
 
   constructor(private route: ActivatedRoute,
     private http: HttpService,
-    private router: Router) {
-
-    this.defaultDataset = true;
-  }
+    private router: Router,
+    private location: Location) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -54,59 +52,38 @@ export class MainComponent implements OnInit {
   }
 
   runQuery() {
+    console.log('/query;q=' + QueryParser.parseTextToUrl(this.textValue));
     if (this.textValue && this.textValue.length > 0) {
-      this.router.navigateByUrl('/query;q=' + QueryParser.parseTextToUrl(this.textValue));
+      this.location.go('/query;q=' + QueryParser.parseTextToUrl(this.textValue));
+      this._query = QueryParser.parseTextToQuery(this.textValue);
+      this.runSparqlQuery();
     }
   }
 
   runSparqlQuery() {
     this.headers = null;
     this.results = null;
-    if (this.defaultDataset) {
-      this.http.getImgpediaSparqlQuery(this._query).subscribe(
-        res => {
-          this.headers = res['head']['vars'];
-          this.results = res['results']['bindings'];
-          if (this.errorMessage) {
-            this.errorMessage = null;
-          }
-        },
-        error => {
-          if (this.headers && this.results) {
-            this.headers = null;
-            this.results = null;
-          }
-          if (error.status === 400) {
-            this.errorMessage = error.error.substr(error.error.indexOf('SPARQL'));
-          }
-          if (error.status === 500) {
-            this.errorMessage = 'Internal server error';
-          }
+    this.http.getImgpediaSparqlQuery(this._query).subscribe(
+      res => {
+        this.headers = res['head']['vars'];
+        this.results = res['results']['bindings'];
+        if (this.errorMessage) {
+          this.errorMessage = null;
         }
-      );
-    } else {
-      this.http.getImgpediaSparqlQueryNoDefaultDataset(this._query).subscribe(
-        res => {
-          this.headers = res['head']['vars'];
-          this.results = res['results']['bindings'];
-          if (this.errorMessage) {
-            this.errorMessage = null;
-          }
-        },
-        error => {
-          if (this.headers && this.results) {
-            this.headers = null;
-            this.results = null;
-          }
-          if (error.status === 400) {
-            this.errorMessage = error.error.substr(error.error.indexOf('SPARQL'));
-          }
-          if (error.status === 500) {
-            this.errorMessage = 'Internal server error';
-          }
+      },
+      error => {
+        if (this.headers && this.results) {
+          this.headers = null;
+          this.results = null;
         }
-      );
-    }
+        if (error.status === 400) {
+          this.errorMessage = error.error.substr(error.error.indexOf('SPARQL'));
+        }
+        if (error.status === 500) {
+          this.errorMessage = 'Internal server error';
+        }
+      }
+    );
   }
 }
 
