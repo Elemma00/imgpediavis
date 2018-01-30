@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import {HttpService} from '../../services/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
+import { QueryParser } from '../../utils/query-parser';
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -18,48 +20,6 @@ export class MainComponent implements OnInit {
 
   private _query: string;
 
-  static parseQueryToUrl(query: string): string {
-    return query
-      .replace(/IMGPEDIA/g, 'http://imgpedia.dcc.uchile.cl/')
-      .replace(/\n/g, '')
-      .replace(/ /g, '+')
-      .replace(/\?/g, '%3F')
-      .replace(/{/g, '%7B')
-      .replace(/}/g, '%7D')
-      .replace(/:/g, '%3A')
-      .replace(/\//g, '%2F')
-      .replace(/#/g, '%23')
-      .replace(/;/g, '%3B')
-      .replace(/¿/g, '%3B');
-  }
-
-  static parseQueryToText(query: string): string {
-    return query
-      .replace(/\+/g, ' ')
-      .replace(/%3F/g, '?')
-      .replace(/%7B/g, '{')
-      .replace(/%7D/g, '}')
-      .replace(/%3A/g, ':')
-      .replace(/%2F/g, '/')
-      .replace(/%23/g, '#')
-      .replace(/%3B/g, ';')
-      .replace(/;/g, ';\n')
-      .replace(/ \./g, ' .\n');
-  }
-
-  static parseTextToUrl(text: string): string {
-    return text
-      .replace(/http:\/\/imgpedia.dcc.uchile.cl\//g, 'IMGPEDIA')
-      .replace(/ /g, '+')
-      .replace(/\?/g, '%3F')
-      .replace(/{/g, '%7B')
-      .replace(/}/g, '%7D')
-      .replace(/:/g, '%3A')
-      .replace(/\//g, '%2F')
-      .replace(/#/g, '%23')
-      .replace(/;/g, '¿');
-  }
-
   constructor(private route: ActivatedRoute,
     private http: HttpService,
     private router: Router) {
@@ -70,9 +30,9 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       if (params['q'] && params['q'].length > 0) {
-        this._query = MainComponent.parseQueryToUrl(params['q']);
+        this._query = QueryParser.parseQueryToUrl(params['q']);
         if (!this.textValue) {
-          this.textValue = MainComponent.parseQueryToText(this._query);
+          this.textValue = QueryParser.parseQueryToText(this._query);
         }
         this.runSparqlQuery();
       } else {
@@ -95,7 +55,7 @@ export class MainComponent implements OnInit {
 
   runQuery() {
     if (this.textValue && this.textValue.length > 0) {
-      this.router.navigateByUrl('/query;q=' + MainComponent.parseTextToUrl(this.textValue));
+      this.router.navigateByUrl('/query;q=' + QueryParser.parseTextToUrl(this.textValue));
     }
   }
 
