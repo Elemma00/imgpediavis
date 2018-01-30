@@ -52,7 +52,6 @@ export class MainComponent implements OnInit {
   }
 
   runQuery() {
-    console.log('/query;q=' + QueryParser.parseTextToUrl(this.textValue));
     if (this.textValue && this.textValue.length > 0) {
       this.location.go('/query;q=' + QueryParser.parseTextToUrl(this.textValue));
       this._query = QueryParser.parseTextToQuery(this.textValue);
