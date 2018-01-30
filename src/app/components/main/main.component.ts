@@ -14,6 +14,7 @@ export class MainComponent implements OnInit {
   headers: Object;
   results: Object;
   errorMessage: string;
+  defaultDataset: boolean;
 
   private _query: string;
 
@@ -62,6 +63,8 @@ export class MainComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private http: HttpService,
     private router: Router) {
+
+    this.defaultDataset = true;
   }
 
   ngOnInit() {
@@ -99,6 +102,7 @@ export class MainComponent implements OnInit {
   runSparqlQuery() {
     this.headers = null;
     this.results = null;
+    if (this.defaultDataset) {
       this.http.getImgpediaSparqlQuery(this._query).subscribe(
         res => {
           this.headers = res['head']['vars'];
@@ -120,6 +124,29 @@ export class MainComponent implements OnInit {
           }
         }
       );
+    } else {
+      this.http.getImgpediaSparqlQueryNoDefaultDataset(this._query).subscribe(
+        res => {
+          this.headers = res['head']['vars'];
+          this.results = res['results']['bindings'];
+          if (this.errorMessage) {
+            this.errorMessage = null;
+          }
+        },
+        error => {
+          if (this.headers && this.results) {
+            this.headers = null;
+            this.results = null;
+          }
+          if (error.status === 400) {
+            this.errorMessage = error.error.substr(error.error.indexOf('SPARQL'));
+          }
+          if (error.status === 500) {
+            this.errorMessage = 'Internal server error';
+          }
+        }
+      );
+    }
   }
 }
 

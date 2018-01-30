@@ -19,7 +19,7 @@ export class HttpService {
       {headers: Constants.CORS_HEADER});
   }
 
-  getImgInfo(fileName: string) : Observable<ImgpediaDetailQueryResult> {
+  getImgInfo(fileName: string): Observable<ImgpediaDetailQueryResult> {
     return this.http.get<ImgpediaDetailQueryResult>(Constants.IMGPEDIA_URL_IMAGE_DETAIL.replace('XXXX', fileName), {headers: Constants.CORS_HEADER});
   }
 
@@ -47,5 +47,9 @@ export class HttpService {
 
   getImgpediaSparqlQuery(query: string): Observable<Object> {
     return this.http.get(Constants.IMGPEDIA_URL_QUERY + query, {headers: Constants.CORS_HEADER});
+  }
+
+  getImgpediaSparqlQueryNoDefaultDataset(query: string): Observable<Object> {
+    return this.http.get(Constants.IMGPEDIA_URL_QUERY_NO_DEFAULT_DATASET + query, {headers: Constants.CORS_HEADER});
   }
 }
