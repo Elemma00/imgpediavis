@@ -7,6 +7,7 @@ import {Constants} from '../models/constants.model';
 import {ImgpediaBindingQueryResult} from '../models/imgpedia-image-binding-query.model';
 import {ImgpediaDetailQueryResult} from '../models/imgpedia-image-detail-query.model';
 import {WikiApiConsult} from '../models/wiki-api-image-info.model';
+import {QueryParser} from '../utils/query-parser';
 
 
 
@@ -45,7 +46,8 @@ export class HttpService {
       {headers: Constants.CORS_HEADER});
   }
 
-  getImgpediaSparqlQuery(query: string): Observable<Object> {
+  getImgpediaSparqlQuery(text: string): Observable<Object> {
+    const query = QueryParser.textToQuery(text);
     return this.http.get(Constants.IMGPEDIA_URL_QUERY + query, {headers: Constants.CORS_HEADER});
   }
 }

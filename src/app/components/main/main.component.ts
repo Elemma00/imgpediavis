@@ -19,8 +19,6 @@ export class MainComponent implements OnInit {
   errorMessage: string;
   loading: boolean;
 
-  private _query: string;
-
   constructor(private route: ActivatedRoute,
     private http: HttpService,
     private router: Router,
@@ -32,13 +30,9 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       if (params['q'] && params['q'].length > 0) {
-        this._query = QueryParser.parseQueryToUrl(params['q']);
-        if (!this.textValue) {
-          this.textValue = QueryParser.parseQueryToText(this._query);
-        }
+        this.textValue = QueryParser.urlParamToText(params['q']);
         this.runSparqlQuery();
       } else {
-        this._query = null;
         this.textValue = 'SELECT ?Source ?Target ?Distance WHERE{ ?Rel <http://imgpedia.dcc.uchile.cl/ontology#sourceImage> ?Source;\n' +
           ' <http://imgpedia.dcc.uchile.cl/ontology#targetImage> ?Target;\n' +
           ' <http://imgpedia.dcc.uchile.cl/ontology#distance> ?Distance .\n' +
@@ -57,8 +51,7 @@ export class MainComponent implements OnInit {
 
   runQuery() {
     if (this.textValue && this.textValue.length > 0) {
-      this.location.go('/query;q=' + QueryParser.parseTextToUrl(this.textValue));
-      this._query = QueryParser.parseTextToQuery(this.textValue);
+      this.location.go('/query;q=' + QueryParser.textToUrlParam(this.textValue));
       this.runSparqlQuery();
     }
   }
@@ -67,7 +60,7 @@ export class MainComponent implements OnInit {
     this.headers = null;
     this.results = null;
     this.loading = true;
-    this.http.getImgpediaSparqlQuery(this._query).subscribe(
+    this.http.getImgpediaSparqlQuery(this.textValue).subscribe(
       res => {
         this.headers = res['head']['vars'];
         this.results = res['results']['bindings'];
