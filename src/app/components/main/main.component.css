@@ -9,6 +9,7 @@
 
 .query-btn {
   margin-left: 50%;
+  max-height: 88px;
 }
 
 #inputText {

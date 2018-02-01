@@ -14,6 +14,7 @@ import {AngularFittextModule} from 'angular-fittext';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material';
 import { MatGridListModule } from '@angular/material';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material';
 import { MatTabsModule } from '@angular/material';
 
@@ -62,6 +63,7 @@ const routes: Routes = [
     MatButtonModule,
     MatCardModule,
     MatGridListModule,
+    MatProgressSpinnerModule,
     MatToolbarModule,
     MatTabsModule,
     DynamicModule.withComponents([ResultColUrlComponent, ResultColImageComponent, ResultColValComponent, ResultColNullComponent]),

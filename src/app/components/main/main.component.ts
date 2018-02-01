@@ -17,13 +17,17 @@ export class MainComponent implements OnInit {
   headers: Object;
   results: Object;
   errorMessage: string;
+  loading: boolean;
 
   private _query: string;
 
   constructor(private route: ActivatedRoute,
     private http: HttpService,
     private router: Router,
-    private location: Location) {}
+    private location: Location) {
+
+    this.loading = false;
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -62,12 +66,16 @@ export class MainComponent implements OnInit {
   runSparqlQuery() {
     this.headers = null;
     this.results = null;
+    this.loading = true;
     this.http.getImgpediaSparqlQuery(this._query).subscribe(
       res => {
         this.headers = res['head']['vars'];
         this.results = res['results']['bindings'];
         if (this.errorMessage) {
           this.errorMessage = null;
+        }
+        if (this.loading) {
+          this.loading = false;
         }
       },
       error => {
@@ -79,7 +87,10 @@ export class MainComponent implements OnInit {
           this.errorMessage = error.error.substr(error.error.indexOf('SPARQL'));
         }
         if (error.status === 500) {
-          this.errorMessage = 'Internal server error';
+          this.errorMessage = 'Internal server errorn\n' + error.error;
+        }
+        if (this.loading) {
+          this.loading = false;
         }
       }
     );

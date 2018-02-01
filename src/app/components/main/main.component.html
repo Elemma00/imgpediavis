@@ -8,7 +8,8 @@
 <textarea [(ngModel)]="textValue" id="inputText" placeholder="Insert Sparql query..." rows="10"></textarea>
 
 <div class="query-btn">
-  <button mat-raised-button  color="primary" style="background-color: #5fd1da" (click)="runQuery()">Run Query</button>
+  <button *ngIf="!loading" mat-raised-button  color="primary" style="background-color: #5fd1da" (click)="runQuery()">Run Query</button>
+  <mat-spinner *ngIf="loading"></mat-spinner>
 </div>
 
 <div *ngIf="errorMessage && !headers && !results" class="alert alert-danger">
