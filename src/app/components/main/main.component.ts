@@ -51,7 +51,6 @@ export class MainComponent implements OnInit {
 
   runQuery() {
     if (this.textValue && this.textValue.length > 0) {
-      this.location.go('/query/' + QueryParser.textToUrlParam(this.textValue));
       this.runSparqlQuery();
     }
   }
@@ -60,6 +59,7 @@ export class MainComponent implements OnInit {
     this.headers = null;
     this.results = null;
     this.loading = true;
+    this.location.go('/query/' + QueryParser.textToUrlParam(this.textValue));
     this.http.getImgpediaSparqlQuery(this.textValue).subscribe(
       res => {
         this.headers = res['head']['vars'];
