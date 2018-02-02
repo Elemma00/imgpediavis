@@ -1,12 +1,26 @@
 export class QueryParser {
 
   static urlParamToText(param: string): string {
-    return atob(param.replace(/%2F/g, '/'));
+    return atob(param.replace(/_/g, '/'));
   }
 
   static textToUrlParam(text: string): string {
-    return btoa(text).replace(/\//g, '%2F');
+    let d, i: number;
+    const param: string = btoa(text).replace(/\//g, '_');
+
+    /* Here we handle the restriction of 255 chars for filesystem's filenames that some server (like Apache) has
+    * The extra '/'s are removed by the [CustomUrlSerializer] */
+    if ((d = Math.floor(param.length / 250)) > 0) {
+      let paramSlash: string = param.substr(0, 249);
+      for (i = 1; i <= d; i++) {
+        paramSlash = paramSlash + '/' + param.substr(250 * i - 1, 250);
+      }
+      console.log(paramSlash);
+      return paramSlash;
+    }
+    return param;
   }
+
 
   static textToQuery(text: string): string {
     return text

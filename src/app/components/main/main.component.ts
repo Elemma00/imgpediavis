@@ -51,7 +51,7 @@ export class MainComponent implements OnInit {
 
   runQuery() {
     if (this.textValue && this.textValue.length > 0) {
-      this.location.go('/query;q=' + QueryParser.textToUrlParam(this.textValue));
+      this.location.go('/query/' + QueryParser.textToUrlParam(this.textValue));
       this.runSparqlQuery();
     }
   }
