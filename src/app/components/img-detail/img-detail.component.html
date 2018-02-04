@@ -1,32 +1,32 @@
-<mat-toolbar color="primary" style="height: 50px; background: #5fd1da">
-  <a href="/" style="height: inherit; margin-right: 2%; margin-top: 20px; margin-bottom: 15px">
-    <img src="assets/img/imgpedia-min.png" style="height: 80%">
+<mat-toolbar color="primary" class="banner">
+  <a href="/">
+    <img src="assets/img/imgpedia-min.png" class="logo">
   </a>
-  <strong style="text-align: center; text-overflow: ellipsis">{{parseText(detail.fileName)}}</strong>
+  <strong class="filename">{{parseText(detail.fileName)}}</strong>
 </mat-toolbar>
 <br>
-<mat-card style="width: 50%; margin-left: 25%">
-    <a [href]=detail.originalUrl><img mat-card-image id="main-image" [src]=detail.thumbUrl></a>
-    <mat-card-content>
-      <p><b>File: </b>{{parseText(detail.fileName)}}</p>
+<mat-card class="main-card">
+  <a [href]=detail.originalUrl><img mat-card-image [src]=detail.thumbUrl></a>
+  <mat-card-content>
+    <p><b>File: </b>{{parseText(detail.fileName)}}</p>
 
-      <p *ngIf="detail.height"><b>Height:</b>{{detail.height}}</p>
+    <p *ngIf="detail.height"><b>Height:</b>{{detail.height}}</p>
 
-      <div *ngIf="associatedWith().length > 0">
-        <b>Associated with</b>
-        <div *ngFor="let associated of associatedWith()" style="text-overflow: ellipsis">
-          <a [href]=associated>{{parseText(associated)}}</a>
-        </div>
+    <div *ngIf="associatedWith().length > 0">
+      <b>Associated with</b>
+      <div *ngFor="let associated of associatedWith()" class="links">
+        <a [href]=associated>{{parseText(associated)}}</a>
       </div>
+    </div>
 
-      <div *ngIf="appearsIn().length > 0">
-        <b>Appears in</b>
-        <div *ngFor="let appear of appearsIn()">
-          <a [href]=appear>{{parseText(appear)}}</a>
-        </div>
+    <div *ngIf="appearsIn().length > 0">
+      <b>Appears in</b>
+      <div *ngFor="let appear of appearsIn()" class="links">
+        <a [href]=appear>{{parseText(appear)}}</a>
       </div>
+    </div>
 
-    </mat-card-content>
+  </mat-card-content>
 </mat-card>
 
 <mat-tab-group>
@@ -35,8 +35,9 @@
       <mat-grid-list cols="6" rowHeight="6:3" gutterSize="15px">
         <mat-grid-tile
           *ngFor="let sim of descriptors[desc]">
-          <a [routerLink]="['/detail', sim.fileName]" class="binding"><img [src]="sim.thumbUrl" [alt]="sim.distance"></a>
-          <mat-grid-tile-footer class="dist-desc">
+          <a [routerLink]="['/detail', sim.fileName]" class="binding"><img [src]="sim.thumbUrl"
+                                                                           [alt]="sim.distance"></a>
+          <mat-grid-tile-footer class="distance-descriptor">
             <p>{{sim.distance}}</p>
           </mat-grid-tile-footer>
         </mat-grid-tile>
