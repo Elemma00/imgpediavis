@@ -5,7 +5,7 @@
   </mat-grid-tile>
 </mat-grid-list>
 <hr>
-<div *ngFor="let k of columnsKeys()" [ngStyle]="{'width': colWidth}" style="display: inline-grid;">
+<div *ngFor="let k of columnsKeys()" class="columns" [ngStyle]="{'width': colWidth}">
   <ndc-dynamic [ndcDynamicComponent]="columns[k].cls"
                [ndcDynamicInputs]="{values:columns[k].values, ncolumns: headerLength()}">
   </ndc-dynamic>

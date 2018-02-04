@@ -2,22 +2,27 @@
   display: none;
 }
 
-.full {
-  width: 85%;
-  height: 100%;
+.banner {
+  height: 50px;
+
+  a {
+    height: inherit;
+    margin-right: 2%;
+    margin-top: 20px;
+    margin-bottom: 15px;
+
+    .logo {
+      height: 90%;
+    }
+  }
 }
 
-.query-btn {
+.btn-query {
   margin-left: 50%;
   max-height: 88px;
 }
 
-#inputText {
+.input-query {
   min-width: 100%;
   font-family: monospace;
-}
-
-#image {
-  margin-top: 25%;
-  position: center;
 }

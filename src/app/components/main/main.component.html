@@ -1,14 +1,14 @@
-<mat-toolbar color="primary" style="height: 50px; background: #5fd1da">
-  <a href="/" style="height: inherit; margin-right: 2%; margin-top: 20px; margin-bottom: 15px">
-    <img src="assets/img/imgpedia-min.png" style="height: 90%">
+<mat-toolbar color="primary" class="banner">
+  <a href="/">
+    <img src="assets/img/imgpedia-min.png" class="logo">
   </a>
   <strong>IMGpedia SPARQL Endpoint</strong>
-
 </mat-toolbar>
-<textarea [(ngModel)]="textValue" id="inputText" placeholder="Insert Sparql query..." rows="10"></textarea>
 
-<div class="query-btn">
-  <button *ngIf="!loading" mat-raised-button  color="primary" style="background-color: #5fd1da" (click)="runQuery()">Run Query</button>
+<textarea [(ngModel)]="textValue" class="input-query" placeholder="Insert Sparql query..." rows="10"></textarea>
+
+<div class="btn-query">
+  <button mat-raised-button *ngIf="!loading" color="primary" (click)="runQuery()">Run Query</button>
   <mat-spinner *ngIf="loading"></mat-spinner>
 </div>
 
@@ -16,5 +16,6 @@
   <strong>ERROR</strong>
   <pre>{{errorMessage}}</pre>
 </div>
+
 <app-query-result *ngIf="!errorMessage && headers && headersLength() > 0 &&
                         results && resultsLength() > 0" [headers]="headers" [results]="results"></app-query-result>
