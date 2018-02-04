@@ -12,7 +12,7 @@ import { Page } from '../../models/wiki-api-image-info.model';
 @Component({
   selector: 'app-img-detail',
   templateUrl: './img-detail.component.html',
-  styleUrls: ['./img-detail.component.css']
+  styleUrls: ['./img-detail.component.scss']
 })
 export class ImgDetailComponent implements OnInit {
 

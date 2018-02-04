@@ -6,7 +6,7 @@ import {FilenameThumbnail} from '../../../../models/filename-thumbnail.model';
 @Component({
   selector: 'app-result-col-image',
   templateUrl: './result-col-image.component.html',
-  styleUrls: ['./result-col-image.component.css'],
+  styleUrls: ['./result-col-image.component.scss'],
 })
 export class ResultColImageComponent implements OnInit {
 

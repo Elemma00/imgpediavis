@@ -10,7 +10,7 @@ import {ResultColNullComponent} from './result-col/null/result-col-null.componen
 @Component({
   selector: 'app-query-result',
   templateUrl: './query-result.component.html',
-  styleUrls: ['./query-result.component.css']
+  styleUrls: ['./query-result.component.scss']
 })
 export class QueryResultComponent implements OnInit, OnChanges {
 

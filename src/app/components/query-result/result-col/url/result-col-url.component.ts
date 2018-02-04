@@ -4,7 +4,7 @@ import {Constants} from '../../../../models/constants.model';
 @Component({
   selector: 'app-result-col-url',
   templateUrl: './result-col-url.component.html',
-  styleUrls: ['./result-col-url.component.css']
+  styleUrls: ['./result-col-url.component.scss']
 })
 export class ResultColUrlComponent implements OnInit {
 
