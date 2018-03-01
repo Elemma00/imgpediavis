@@ -15,7 +15,6 @@ export class QueryParser {
       for (i = 1; i <= d; i++) {
         paramSlash = paramSlash + '/' + param.substr(250 * i - 1, 250);
       }
-      console.log(paramSlash);
       return paramSlash;
     }
     return param;
@@ -33,6 +32,10 @@ export class QueryParser {
       .replace(/\//g, '%2F')
       .replace(/#/g, '%23')
       .replace(/;/g, '%3B')
-      .replace(/¿/g, '%3B');
+      .replace(/¿/g, '%3B')
+      .replace(/\//g, '%28')
+      .replace(/\\/g, '%29')
+      .replace(/&/g, '%26')
+      .replace(/=/g, '%3D');
   }
 }
