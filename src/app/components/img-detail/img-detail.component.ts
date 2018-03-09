@@ -88,7 +88,6 @@ export class ImgDetailComponent implements OnInit {
     for (let i = 0, j = similars.length; i < j; i += Constants.MAX_WIKI_REQUEST) {
         this.http.getSimilarImgInfo(similars.slice(i, i + Constants.MAX_WIKI_REQUEST), window.screen.width / 4)
           .subscribe( res => {
-            console.log(res);
               const pages = res.query.pages;
               for (const key in pages) {
                 if (pages.hasOwnProperty(key)) {

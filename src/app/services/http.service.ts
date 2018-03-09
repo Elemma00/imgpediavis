@@ -30,16 +30,10 @@ export class HttpService {
   }
 
   getSimilarImgInfo(similars: string[], thumbWidht: number): Observable<WikiApiConsult> {
-    if (similars.length > Constants.MAX_WIKI_REQUEST) {
-        console.error('[HttpService:getSimilarImgInfo] Exceeded maximum number of files to request (max: ' +
-          Constants.MAX_WIKI_REQUEST + ', requested: ' + similars.length + ')');
-        return null;
-    }
-
     let titles = '';
     for (let i = 0; i < similars.length; i++) {
       const ss = similars[i].split('/');
-      titles += 'File:' + ss[ss.length - 1] + '|';
+      titles += 'File:' + ss[ss.length - 1].replace(/&/g, '%26') + '|';
     }
     titles = titles.substr(0, titles.length - 1);
     return this.http.get<WikiApiConsult>(Constants.WIKI_API_IMAGE_INFO.replace('%', titles).replace('iiurlwidth=%', 'iiurlwidth=' + thumbWidht),
