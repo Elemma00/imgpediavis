@@ -15,10 +15,10 @@ export class ResultColImageComponent implements OnInit {
   thumbs: FilenameThumbnail[];
   rowHeight = Constants.QUERY_RESULT_ROW_HEIGHT;
 
-  private _fileNames: Set<string>;
+  private _fileNames: Array<string>;
 
   constructor(private http: HttpService) {
-    this._fileNames = new Set<string>();
+    this._fileNames = [];
   }
 
   ngOnInit() {
@@ -30,13 +30,13 @@ export class ResultColImageComponent implements OnInit {
         const filename = s[s.length - 1];
         let i;
         if ((i = filename.indexOf('File:')) === 0) {
-          this._fileNames.add(filename.substr(5));
+          this._fileNames.push(filename.substr(5));
         } else {
-          this._fileNames.add(filename);
+          this._fileNames.push(filename);
         }
       }
     }
-    this.getImgsUrls();
+    this.getImgsUrls(0);
   }
 
   cleanValues() {
@@ -64,8 +64,8 @@ export class ResultColImageComponent implements OnInit {
     return r;
   }
 
-  getImgsUrls() {
-    const a_fileNames = Array.from(this._fileNames);
+  getImgsUrls(initIndex: number) {
+    const a_fileNames = this._fileNames.slice(initIndex, initIndex + Constants.MAX_WIKI_REQUEST);
     this.http.getSimilarImgInfo(a_fileNames, 300).subscribe(res => {
       const pages = res.query.pages;
       for (const key in pages) {
@@ -88,6 +88,9 @@ export class ResultColImageComponent implements OnInit {
             }
           }
         }
+      }
+      if (initIndex + Constants.MAX_WIKI_REQUEST < this.values.length) {
+        this.getImgsUrls(initIndex + Constants.MAX_WIKI_REQUEST);
       }
     });
   }
