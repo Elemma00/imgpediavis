@@ -23,7 +23,9 @@ export class QueryParser {
 
   static textToQuery(text: string): string {
     return text
+      .replace(/%/g, '%25')
       .replace(/\n/g, '%0D%0A')
+      .replace(/\+/g, '%2B')
       .replace(/ /g, '+')
       .replace(/\?/g, '%3F')
       .replace(/{/g, '%7B')
@@ -35,7 +37,11 @@ export class QueryParser {
       .replace(/¿/g, '%3B')
       .replace(/\//g, '%28')
       .replace(/\\/g, '%29')
+      .replace(/=/g, '%3D')
+      .replace(/#/g, '%23')
+      .replace(/\$/g, '%24')
       .replace(/&/g, '%26')
-      .replace(/=/g, '%3D');
+      .replace(/,/g, '%2C')
+      .replace(/@/g, '%40');
   }
 }
