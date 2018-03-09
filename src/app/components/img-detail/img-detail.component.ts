@@ -28,7 +28,7 @@ export class ImgDetailComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.detail = new ImgDetailInfo();
-      this.detail.fileName = params['filename'];
+      this.detail.fileName = params['filename'].replace(/&/g, '%26');
       this.similarsNames = [];
       this.descriptors = {};
       this.getImg();
@@ -38,7 +38,7 @@ export class ImgDetailComponent implements OnInit {
 
   parseText(text: string) {
     return text
-      .replace(/_/g, ' ');
+      .replace(/_/g, ' ').replace(/%26/g, '&');
   }
 
   getDescriptors(): string[] {

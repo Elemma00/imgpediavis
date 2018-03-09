@@ -17,7 +17,7 @@ export class HttpService {
 
   getImgUrl(fileName: string, thumbWidth: number): Observable<WikiApiConsult> {
     return this.http.get<WikiApiConsult>(
-      Constants.WIKI_API_IMAGE_INFO.replace('%', 'File:' + fileName).replace('%', '' + thumbWidth),
+      Constants.WIKI_API_IMAGE_INFO.replace('%', 'File:' + fileName).replace('iiurlwidth=%', 'iiurlwidth=' + thumbWidth),
       {headers: Constants.CORS_HEADER});
   }
 
