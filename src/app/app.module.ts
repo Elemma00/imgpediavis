@@ -64,7 +64,6 @@ const routes: Routes = [
     MatToolbarModule,
     MatTabsModule,
     DynamicModule.withComponents([ResultColUrlComponent, ResultColImageComponent, ResultColValComponent, ResultColNullComponent]),
-    AngularFittextModule,
   ],
   providers: [
     HttpService,
