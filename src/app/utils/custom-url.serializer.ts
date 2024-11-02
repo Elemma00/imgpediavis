@@ -1,5 +1,7 @@
 import {UrlSerializer, UrlTree, DefaultUrlSerializer} from '@angular/router';
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class CustomUrlSerializer implements UrlSerializer {
 
   private _defaultUrlSerializer: DefaultUrlSerializer = new DefaultUrlSerializer();
