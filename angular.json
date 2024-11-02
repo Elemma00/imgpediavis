@@ -54,10 +54,10 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "imgpediavis:build:production"
+              "buildTarget": "imgpediavis:build:production"
             },
             "development": {
-              "browserTarget": "imgpediavis:build:development"
+              "buildTarget": "imgpediavis:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -65,7 +65,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "imgpediavis:build"
+            "buildTarget": "imgpediavis:build"
           }
         },
         "test": {

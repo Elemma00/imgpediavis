@@ -56,7 +56,12 @@ const routes: Routes = [
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(routes, {useHash: false}),
+    RouterModule.forRoot(routes, {
+      useHash: false,
+      canceledNavigationResolution: 'computed',
+      paramsInheritanceStrategy: 'always',
+      urlUpdateStrategy: 'deferred'
+    }),
     MatButtonModule,
     MatCardModule,
     MatGridListModule,
