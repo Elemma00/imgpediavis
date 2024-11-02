@@ -5,7 +5,7 @@
   <strong>IMGpedia SPARQL Endpoint</strong>
 </mat-toolbar>
 
-<textarea [(ngModel)]="textValue" class="input-query" placeholder="Insert Sparql query..." rows="10"></textarea>
+<textarea [(ngModel)]="textValue" (ngModelChange)="onTextChange($event)" class="input-query" placeholder="Insert Sparql query..." rows="10"></textarea>
 
 <div class="btn-query">
   <button mat-raised-button *ngIf="!loading" color="primary" (click)="runQuery()">Run Query</button>

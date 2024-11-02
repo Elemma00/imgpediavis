@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/share';
+import {Observable} from 'rxjs';
+
 
 import {Constants} from '../models/constants.model';
 import {ImgpediaBindingQueryResult} from '../models/imgpedia-image-binding-query.model';

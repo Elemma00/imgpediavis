@@ -14,6 +14,7 @@ import { QueryParser } from '../../utils/query-parser';
 export class MainComponent implements OnInit {
 
   textValue: string;
+  previousTextValue: string;
   headers: Object;
   results: Object;
   errorMessage: string;
@@ -39,6 +40,10 @@ export class MainComponent implements OnInit {
           '} LIMIT 10';
       }
     });
+  }
+
+  onTextChange(newValue: string) {
+    this.previousTextValue = newValue;
   }
 
   headersLength(): number {
