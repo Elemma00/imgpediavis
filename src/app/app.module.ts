@@ -8,7 +8,6 @@ import {Routes, RouterModule, UrlSerializer} from '@angular/router';
 
 /* Libraries */
 import { DynamicModule } from 'ng-dynamic-component';
-import {AngularFittextModule} from 'angular-fittext';
 
 /* Material */
 import { MatButtonModule } from '@angular/material/button';
