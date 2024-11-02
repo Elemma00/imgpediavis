@@ -43,19 +43,24 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ]
-            }
-          }
+            },
+            "development": {}
+          },
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "imgpediavis:build"
           },
           "configurations": {
             "production": {
               "browserTarget": "imgpediavis:build:production"
+            },
+            "development": {
+              "browserTarget": "imgpediavis:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -105,7 +110,8 @@
           "options": {
             "protractorConfig": "./protractor.conf.js",
             "devServerTarget": "imgpediavis:serve"
-          }
+          },
+          "configurations": {}
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
