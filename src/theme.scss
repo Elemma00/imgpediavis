@@ -1,11 +1,14 @@
-@import '~@angular/material/theming';
+@use '@angular/material' as mat;
 
-@include mat-core();
+$theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$cyan-palette,
+    tertiary: mat.$red-palette, 
+  )
+));
 
-$app-primary: mat-palette($mat-cyan);
-$app-accent:  mat-palette($mat-cyan);
-$app-warn:    mat-palette($mat-red);
-
-$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
-
-@include angular-material-theme($app-theme);
+html {
+    @include mat.all-component-themes($theme);
+    @include mat.button-theme($theme);
+}  

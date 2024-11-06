@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ResultColUrlComponent } from './result-col-url.component';
 
@@ -6,7 +6,7 @@ describe('ResultColUrlComponent', () => {
   let component: ResultColUrlComponent;
   let fixture: ComponentFixture<ResultColUrlComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ResultColUrlComponent ]
     })

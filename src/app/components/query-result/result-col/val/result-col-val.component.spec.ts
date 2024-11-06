@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ResultColValComponent } from './result-col-val.component';
 
@@ -6,7 +6,7 @@ describe('ResultColValComponent', () => {
   let component: ResultColValComponent;
   let fixture: ComponentFixture<ResultColValComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ResultColValComponent ]
     })
