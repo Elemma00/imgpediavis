@@ -37,8 +37,8 @@ const routes: Routes = [
   {path: 'query', component: MainComponent},
   {path: 'query/:q', component: MainComponent},
   {path: 'detail/:filename', component: ImgDetailComponent},
-  {path: '', redirectTo: '/query', pathMatch: 'full' }, // Ruta por defecto
-  {path: '**', redirectTo: '/query' } // Ruta para manejar rutas no encontradas
+//   {path: '', redirectTo: '/query', pathMatch: 'full' }, // Ruta por defecto
+//   {path: '**', redirectTo: '/query' } // Ruta para manejar rutas no encontradas
 ];
 
 
